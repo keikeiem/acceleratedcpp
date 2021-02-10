@@ -31,7 +31,7 @@ string InsertName(void) {
 	string name;
 	cin >> name;
 
-	return (name);
+	return (name); 
 }
 
 void read_test(Student_info& s, const string name, const double midterm, const double final, const vector<double> & homework) {
