@@ -1,5 +1,4 @@
 #pragma once
-#pragma once
 #ifndef METHOD_H
 #define METHOD_H
 
@@ -19,11 +18,6 @@ void foo(int & x);
 
 void Greeting(const string name);
 string InsertName(void);
-
-double grade(double midterm, double final, double homework);
-double grade(double midterm, double final, const vector<double> & hw);
-double get_median_value(vector<double> vec);
-std::istream & read_homework(std::istream& in, vector<double> & hw);
 
 int Chapter4Example1() {
 	cout << "Enter first name: ";
@@ -54,32 +48,7 @@ int Chapter4Example1() {
 	return 0;
 }
 
-struct Student_info {
-	string name;
-	double midterm;
-	double final;
-	vector<double> homework;
-};
-double grade(const Student_info & s);
-std::istream & read(std::istream & in, Student_info& s);
 void read_test(Student_info& s, const string name, const double midterm, const double final, const vector<double> & homework);
-bool compare(const Student_info & x, const Student_info & y) {
-	return (x.name < y.name);
-}
-
-void PrintStudentsData(vector<Student_info> & students) {
-	for (auto iter = students.begin(); iter != students.end(); iter++) {
-		cout << (*iter).name << " | "
-			<< (*iter).midterm << " | "
-			<< (*iter).final << endl;
-		cout << "Homework: ";
-		vector<double> & hw = (*iter).homework;
-		for (auto iter_hw = hw.begin(); iter_hw != hw.end(); iter_hw++) {
-			cout << (*iter_hw) << " ";
-		}
-		cout << endl;
-	}
-}
 
 int Chapter4Example2() {
 	vector<Student_info> students;
@@ -130,6 +99,79 @@ int Chapter4Example2() {
 		cout << endl;
 	}
 	return 0;
+}
+
+int Chapter4Problem1(void) {
+	int max_length;
+	Student_info s;
+	//std::max(s.name.size(), max_length);
+
+	std::max((int)s.name.size(), max_length);
+	std::max(s.name.size(), (size_t)max_length);
+
+	return (0);
+}
+
+int Chapter4Problem2(const int value) {
+	// 1부터 value까지의 정수와 그 제곱을 표시하는데
+	// 정수 | 제곱수
+
+	cout << "Integer" << " | " << "Square" << endl;
+	for (int i = 1; i < value; i++) {
+		cout << std::setw(7) << i << " | "
+			<< std::setw(6) << std::pow(i, 2)
+			<< endl;
+	}	
+
+	return 0;
+}
+
+int Chapter4Problem4(const double value) {
+	// 1부터 value까지의 정수와 그 제곱을 표시하는데
+	// 정수 | 제곱수
+
+	cout << "Integer" << " | " << "Square" << endl;
+	for (int i = 1; i < value; i++) {
+		cout << std::setw(7) << i << " | "
+			<< std::setw(6) << std::pow(i, 2)
+			<< endl;
+	}
+
+	return 0;
+}
+
+int Chapter4Problem5() {
+	// Chapter3 에서 문장에서 단어 추출하여
+	// 개수 세는 작업을 한 것으로 갈음함.
+}
+
+int Chapter4Problem7() {
+	double x;
+	vector<double> datas;
+	while (cin >> x) {
+		datas.push_back(x);
+	}
+
+	if (datas.size() == 0) {
+		cout << "No double value(s)" << endl;
+		return (1);
+	}
+
+	double avg = 0;
+	for (size_t i = 0; i < datas.size(); i++) {
+		avg += datas[i];
+	}
+	//avg = (avg / ((double)datas.size()));
+	avg = avg / datas.size();
+
+	cout << "average is: " << avg << endl;
+	return (0);
+}
+
+int Chapter4Problem8(void) {
+	// double d = f() [n]
+	// std::vector<double> 타입이겠지
+	return (0);
 }
 
 #endif
