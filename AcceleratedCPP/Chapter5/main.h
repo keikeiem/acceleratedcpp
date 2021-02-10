@@ -53,6 +53,7 @@ int Chapter5Example1() {
 
 	sort(students.begin(), students.end(), compare);
 
+	vector<Student_info> failed_students;
 	typedef vector<Student_info>::size_type std_size;
 	for (std_size i = 0; i != students.size(); ++i) {
 		cout << students[i].name
@@ -70,7 +71,23 @@ int Chapter5Example1() {
 		cout << endl;
 	}
 
-	
+	vector<Student_info>::size_type index = 0;
+	while (index < students.size()) {
+		if (check_fail(students[index]))
+		{
+			failed_students.push_back(students[index]);
+			students.erase(students.begin() + index);
+		}
+		else
+		{
+			index++;
+		}
+	}
+
+	cout << "passed:" << endl;
+	PrintStudentsData(students);
+	cout << "failed:" << endl;
+	PrintStudentsData(failed_students);
 
 	return 0;
 }
