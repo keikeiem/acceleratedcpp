@@ -13,7 +13,8 @@
 
 int main() {
 	//return Chapter5Example1();
-	return Chapter5Example5();
+	//return Chapter5Example5();
+	return Chapter5Example6();
 }
 
 void Greeting(const string name) {
@@ -128,4 +129,30 @@ list<Student_infoL> classify_iter(list<Student_infoL>& s) {
 		}
 	}
 	return failed;
+}
+
+// Chapter5 Example 6
+vector<string> split(const string& s) {
+	vector<string> ret;
+	typedef string::size_type string_size;
+	string_size i = 0;
+
+	while (i != s.size()) {
+		while (i != s.size() && isspace(s[i]))
+		{
+			++i;
+		}
+
+		string_size j = i;
+		while (j != s.size() && !isspace(s[j]))
+		{
+			++j;
+		}
+
+		if (i != j) {
+			ret.push_back(s.substr(i, j - i));
+			i = j;
+		}
+	}
+	return ret;
 }

@@ -149,4 +149,21 @@ int Chapter5Example5() {
 	return 0;
 }
 
+vector<string> split(const string&);
+
+int Chapter5Example6() {
+	string letters = "Look at the picture marked number one in your test book";
+
+	/*for (auto iter = letters.begin(); iter != letters.end(); iter++) {
+		cout << (*iter) << endl;
+	}*/
+
+	vector<string> space_split = split(letters);
+	for (auto iter = space_split.begin(); iter != space_split.end(); iter++) {
+		cout << (*iter) << endl;
+	}
+
+	return 0;
+}
+
 #endif
