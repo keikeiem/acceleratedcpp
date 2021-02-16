@@ -12,7 +12,7 @@ struct Student_info {
 	double final;
 	std::vector<double> homework;
 	double grade;
-};
+ };
 
 struct Student_infoL {
 	std::string name;

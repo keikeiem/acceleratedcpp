@@ -1,4 +1,3 @@
-#pragma once
 #ifndef METHOD_H
 #define METHOD_H
 
@@ -162,6 +161,81 @@ int Chapter5Example6() {
 	for (auto iter = space_split.begin(); iter != space_split.end(); iter++) {
 		cout << (*iter) << endl;
 	}
+
+	return 0;
+}
+
+int Chapter5Example7() {
+	string s;
+	while (getline(cin, s)) {
+		vector<string> v = split(s);
+		for (vector<string>::size_type i = 0; i != v.size(); ++i) {
+			cout << v[i] << endl;
+		}
+	}
+
+	return 0;
+}
+
+int Chapter5Example7_2() {
+	// Same as Chapter5Example7
+	string s;
+	while (cin >> s) {
+		cout << s << endl;
+	}
+	return 0;
+}
+string::size_type width(const vector<string>& v);
+vector<string> frame(const vector<string>& v);
+vector<string> gen_vector(void) {
+	vector<string> vec;
+	vec.push_back("this is an");
+	vec.push_back("example");
+	vec.push_back("to");
+	vec.push_back("illustrate");
+	vec.push_back("framing");
+	return vec;
+};
+
+vector<string> gen_vector2(void) {
+	vector<string> vec;
+	vec.push_back("Look at");
+	vec.push_back("the picture");
+	vec.push_back("marked");
+	vec.push_back("number one");
+	vec.push_back("in your testbook");
+	return vec;
+};
+
+void show_vector_string(const vector<string>& vec) {
+	for (vector<string>::size_type i = 0; i < vec.size(); ++i) {
+		cout << vec[i] << endl;
+	}
+}
+int Chapter5Example8() {
+	// 그림의 외곽 그리기 (asterisk *)
+	vector<string> vec = gen_vector();
+	vector<string> result = frame(vec);
+	show_vector_string(result);
+
+	return 0;
+}
+
+vector<string> vcat(const vector<string>& top, const vector<string>& bottom);
+int Chapter5Example8_2() {
+	vector<string> vec = gen_vector();
+	vector<string> ret = vcat(vec, frame(vec));
+
+	show_vector_string(ret);
+
+	return 0;
+}
+
+vector<string> hcat(const vector<string>& left, const vector<string>& right);
+int Chapter5Example8_3() {
+	vector<string> vec = gen_vector();
+	vector<string> ret = hcat(vec, frame(vec));
+	show_vector_string(ret);
 
 	return 0;
 }
