@@ -15,6 +15,18 @@ double grade(double midterm, double final, const vector<double> & hw) {
 	return grade(midterm, final, get_median_value(hw));
 }
 
-double grade(const Student_info & s) {
-	return grade(s.midterm, s.final, s.homework);
+double grade(Student_info & s) {
+	s.grade = grade(s.midterm, s.final, s.homework);
+	return (s.grade);
+}
+
+void grade(Students & s) {
+	for (Students::iterator iter = s.begin(); iter != s.end(); ++iter) {
+		try {
+			grade(*iter);
+		}
+		catch (domain_error e) {
+			std::cout << e.what();
+		}
+	}
 }

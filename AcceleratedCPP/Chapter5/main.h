@@ -20,13 +20,10 @@ string InsertName(void);
 
 void read_test(Student_info& s, const string name, const double midterm, const double final, const vector<double> & homework);
 Student_info random_grade(const string name);
-Student_infoL random_grade_list(const string name);
-bool check_fail(const Student_info&);
-void classify_index(vector<Student_info>&, vector<Student_info>&);
-void classify_iter(vector<Student_info>&, vector<Student_info>&);
+Students classify_iter(Students& s); // list case
 
 int Chapter5Example1() {
-	vector<Student_info> students;
+	Students students;
 
 	Student_info record;
 
@@ -57,9 +54,9 @@ int Chapter5Example1() {
 	students.push_back(random_grade("delta"));
 	students.push_back(random_grade("epsilon"));
 
-	sort(students.begin(), students.end(), compare);
+	//sort(students.begin(), students.end(), compare);
 
-	vector<Student_info> failed_students;
+	/*Students failed_students;
 	typedef vector<Student_info>::size_type std_size;
 	for (std_size i = 0; i != students.size(); ++i) {
 		cout << students[i].name
@@ -75,15 +72,15 @@ int Chapter5Example1() {
 			cout << e.what();
 		}
 		cout << endl;
-	}
+	}*/
 
 	// Chapter5 Example 1.1
 	// 인덱스를 사용한 vector 접근 방식
 	//classify_index(students, failed_students);
 	// Chapter5 Example 1.2
 	// iterator를 사용한 vector 접근 방식
-	//classify_iter(students, failed_students);
-
+	
+	Students failed_students = classify_iter(students);
 
 	cout << "passed:" << endl;
 	PrintStudentsData(students);
@@ -93,45 +90,42 @@ int Chapter5Example1() {
 	return 0;
 }
 
-void read_test_list(Student_infoL& s, const string name, const double midterm, const double final, const list<double> & homework);
-bool check_fail_list(const Student_infoL&);
-list<Student_infoL> classify_iter(list<Student_infoL>&);
 // list 타입
 int Chapter5Example5() {
-	list<Student_infoL> students;
+	Students students;
 
-	Student_infoL record;
+	Student_info record;
 
 	string::size_type max_length = 0;
 
-	list<double> hw1;
+	vector<double> hw1;
 	hw1.push_back(10);
 	hw1.push_back(20);
 	hw1.push_back(30);
 	hw1.push_back(40);
-	read_test_list(record, "kimkm", 100, 100, hw1);
+	read_test(record, "kimkm", 100, 100, hw1);
 	max_length = std::max(max_length, record.name.size());
 	students.push_back(record);
 
-	list<double> hw2;
+	vector<double> hw2;
 	hw2.push_back(50);
 	hw2.push_back(40);
 	hw2.push_back(30);
 	hw2.push_back(40);
-	read_test_list(record, "kyungmin", 50, 50, hw2);
+	read_test(record, "kyungmin", 50, 50, hw2);
 	max_length = std::max(max_length, record.name.size());
 	students.push_back(record);
 
-	students.push_back(random_grade_list("note"));
-	students.push_back(random_grade_list("alpha"));
-	students.push_back(random_grade_list("beta"));
-	students.push_back(random_grade_list("gamma"));
-	students.push_back(random_grade_list("delta"));
-	students.push_back(random_grade_list("epsilon"));
+	students.push_back(random_grade("note"));
+	students.push_back(random_grade("alpha"));
+	students.push_back(random_grade("beta"));
+	students.push_back(random_grade("gamma"));
+	students.push_back(random_grade("delta"));
+	students.push_back(random_grade("epsilon"));
 
-	students.sort(compare_list);
-
-	list<Student_infoL> failed_students = classify_iter(students);
+	//students.sort(compare);
+	grade(students);
+	Students failed_students = classify_iter(students);
 	// Chapter5 Example 1.1
 	// 인덱스를 사용한 vector 접근 방식
 	//classify_index(students, failed_students);
