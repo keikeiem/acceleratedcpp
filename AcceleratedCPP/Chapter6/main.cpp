@@ -12,7 +12,10 @@
 #include "main.h"
 
 int main() {
-	return Chapter6Example1();
+	//return Chapter6Example1();
+	//return Chapter6Example1_1();
+	//return Chapter6Example1_2();
+	return Chapter6Example1_3();
 }
 
 void Greeting(const string name) {
@@ -70,128 +73,83 @@ Students classify_iter(Students& s) {
 	return failed;
 }
 
-// Chapter5 Example 6
+// Chapter6 Example 1-1
+bool space(char c) {
+	return (isspace(c));
+}
+
+bool not_space(char c) {
+	return !(isspace(c));
+}
+
 vector<string> split(const string& s) {
 	vector<string> ret;
-	typedef string::size_type string_size;
-	string_size i = 0;
+	typedef string::const_iterator iter;
+	iter i = s.begin();
 
-	while (i != s.size()) {
-		while (i != s.size() && isspace(s[i]))
-		{
-			++i;
-		}
+	while (i != s.end()) {
+		i = std::find_if(i, s.end(), not_space);
 
-		string_size j = i;
-		while (j != s.size() && !isspace(s[j]))
-		{
-			++j;
-		}
+		iter j = std::find_if(i, s.end(), space);
 
-		if (i != j) {
-			ret.push_back(s.substr(i, j - i));
-			i = j;
+		if (i != s.end()) {
+			ret.push_back(string(i, j));
 		}
+		i = j;
 	}
+
 	return ret;
 }
 
-// Chapter5 Example 8
-string::size_type width(const vector<string>& v) {
-	string::size_type max_length = 0;
-	for (vector<string>::size_type i = 0; i != v.size(); ++i) {
-		max_length = std::max(max_length, v[i].size());
-	}
-	return (max_length);
-}
-
-vector<string> frame(const vector<string>& v) {
+// Chapter6 Example 1-3
+vector<string> find_urls(const string& s) {
 	vector<string> ret;
-	string::size_type max_length = width(v);
-	string border(max_length + 4, ' *');
+	typedef string::const_iterator iter;
+	iter b = s.begin(), e = s.end();
 
-	ret.push_back(border);
-	// draw boundary using asterisk and empty space ...
-	for (vector<string>::size_type i = 0; i != v.size(); ++i) {
-		ret.push_back("* " + v[i] + 
-			string(max_length - v[i].size(), ' ') + " *");
-	}
-	ret.push_back(border);
-
-	return ret;
-}
-// Chapter 5 Example 8-2
-vector<string> vcat(const vector<string>& top, const vector<string>& bottom) {
-	// top 그림을 복사
-	vector<string> ret = top;
-
-	// 전체 bottom 그림을 복사
-	for (vector<string>::const_iterator iter = bottom.begin(); iter != bottom.end(); ++iter) {
-		ret.push_back(*iter);
+	while (b != e) {
+		b = url_beg(b, e);
+		if (b != e) {
+			iter after = url_end(b, e);
+			ret.push_back(string(b, after));
+			b = after;
+		}
 	}
 	return ret;
 }
-// Chapter 5 Example 8-3
-vector<string> hcat(const vector<string>& left, const vector<string>& right) {
-	vector<string> ret;
 
-	// 그림 사이의 공백을 위해 +1
-	string::size_type width1 = width(left) + 1;
+string::const_iterator url_beg(string::const_iterator begin, string::const_iterator end) {
 
-	// left와 right를 가리키는 인덱스
-	vector<string>::size_type i = 0;
-	vector<string>::size_type j = 0;
+	static const string sep = "://";
+	typedef string::const_iterator iter;
+	iter i = begin;
 
-	while (i != left.size() || j != right.size()) {
-		string s;
-		if (i != left.size())
-			s = left[i++];
+	while ((i = search(i, end, sep.begin(), sep.end())) != end) {
+		if (i != begin && i + sep.size() != end) {
+			// beg는 protocol-name 부분
+			iter beg = i;
+			while (beg != begin && isalpha(beg[-1])) {
+				--beg;
+			}
 
-		s += string(width1 - s.size(), ' ');
-
-		if (j != right.size())
-			s += right[j++];
-
-		ret.push_back(s);
-	}
-
-	return ret;
-}
-
-// Chapter5 Problem1
-void make_rotation(vector<string>& container, const string& v) {
-	vector<string> sp = split(v);
-	//show_vector_string(sp);
-	vector<string>::size_type i = 0;
-
-	int count = 0;
-	while (i < sp.size()) {
-		string first_item;
-		count = 0;
-		for (vector<string>::size_type j = 0; j <= i; j++) {
-			if (count > 0)
-				first_item += " ";
-			first_item += sp[j];
-			count++;
+			if (beg != i && !not_url_char(i[sep.size()]))
+				return beg;
 		}
 
-		if (!first_item.empty())
-			container.push_back(first_item);
-
-		string second_item;
-		count = 0;
-		for (vector<string>::size_type k = i + 1; k != sp.size(); k++) {
-			if (count > 0) 
-				second_item += " ";
-
-			second_item += sp[k];
-			count++;
-		}
-
-		if (!second_item.empty())
-			container.push_back(second_item);
-
-		i++;
+		i += sep.size();
 	}
+	return end;
 }
+
+string::const_iterator url_end(string::const_iterator begin, string::const_iterator end) {
+	return std::find_if(begin, end, not_url_char);
+}
+
+bool not_url_char(char c) {
+	static const string url_char = "~;/?:@=&$?.+!*?),";
+
+	return !(isalnum(c)
+		|| find(url_char.begin(), url_char.end(), c) != url_char.end());
+}
+
 
