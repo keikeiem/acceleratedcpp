@@ -14,7 +14,7 @@
 
 int main() {
 	//return Chapter5Example1();
-	return Chapter5Example5();
+	//return Chapter5Example5();
 	//return Chapter5Example6();
 	//return Chapter5Example7();
 	//return Chapter5Example8();
@@ -22,6 +22,10 @@ int main() {
 	//return Chapter5Example8_3();
 
 	//return Chapter5Problem1();
+	//return Chapter5Problem4();
+	//return Chapter5Problem6();
+	//return Chapter5Problem9();
+	return Chapter5Problem10();
 }
 
 void Greeting(const string name) {
@@ -77,6 +81,43 @@ Students classify_iter(Students& s) {
 		}
 	}
 	return failed;
+}
+
+Students extract_fails(Students & s) {
+	Students fail;
+	Students::size_type i = 0;
+	while (i != s.size()) {
+		if (check_fail(s[i])) {
+			fail.push_back(s[i]);
+			s.erase(s.begin() + i);
+		}
+		else {
+			++i;
+		}
+	}
+	return fail;
+}
+
+Students resize_vector(Students & s) {
+	Students fail;
+	Students::size_type passed_count = 0;
+	Students::size_type i = 0;
+
+	while (i != s.size()) {
+		if (check_fail(s[i])) {
+			fail.push_back(s[i]);
+			//s.erase(s.begin() + i);
+			i++;
+		}
+		else {
+			s.insert(s.begin(), s[i]);
+			i += 2;
+			passed_count++;
+		}
+	}
+	s.resize(passed_count);
+
+	return fail;
 }
 
 // Chapter5 Example 6

@@ -21,6 +21,8 @@ string InsertName(void);
 void read_test(Student_info& s, const string name, const double midterm, const double final, const vector<double> & homework);
 Student_info random_grade(const string name);
 Students classify_iter(Students& s); // list case
+Students extract_fails(Students& s); // only vector (problem 6)
+Students resize_vector(Students& s); // only vector (problem 6)
 
 int Chapter5Example1() {
 	Students students;
