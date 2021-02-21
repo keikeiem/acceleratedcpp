@@ -20,6 +20,10 @@ double grade(Student_info & s) {
 	return (s.grade);
 }
 
+double grade(const Student_info& s) {
+	return grade(s.midterm, s.final, s.homework);
+}
+
 void grade(Students & s) {
 	for (Students::iterator iter = s.begin(); iter != s.end(); ++iter) {
 		try {
@@ -31,7 +35,7 @@ void grade(Students & s) {
 	}
 }
 
-double grade_aux(Student_info& s) {
+double grade_aux(const Student_info& s) {
 	try {
 		return grade(s);
 	}
