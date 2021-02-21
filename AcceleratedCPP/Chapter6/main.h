@@ -112,6 +112,13 @@ int Chapter6Example1_3() {
 bool did_all_hw(const Student_info& s);
 void classify_did_hw(const vector<Student_info>&, vector<Student_info>&, vector<Student_info>&);
 double median_analysis(const vector<Student_info>& s);
+
+double average(const vector<double>& v);
+double average_grade(const Student_info& s);
+double average_analysis(const vector<Student_info>& s);
+double optimistic_median(const Student_info& s);
+double optimistic_median_analysis(const vector<Student_info>& s);
+
 void write_analysis(std::ostream& out
 	, const string& name
 	, double analysis(const vector<Student_info>&)
@@ -132,16 +139,18 @@ int Chapter6Example2() {
 	hw1.push_back(10);
 	hw1.push_back(0);
 	hw1.push_back(0);
-	hw1.push_back(40);
-	read_test(record, "kimkm", 100, 100, hw1);
+	hw1.push_back(30);
+	cout << "kyungmin: " << get_median_value(hw1) << endl;
+	read_test(record, "kimkm", 50, 50, hw1);
 	max_length = std::max(max_length, record.name.size());
 	students.push_back(record);
 
 	vector<double> hw2;
 	hw2.push_back(50);
-	hw2.push_back(40);
 	hw2.push_back(0);
-	hw2.push_back(40);
+	hw2.push_back(0);
+	hw2.push_back(30);
+	cout << "kyungmin: " << get_median_value(hw2) << endl;
 	read_test(record, "kyungmin", 50, 50, hw2);
 	max_length = std::max(max_length, record.name.size());
 	students.push_back(record);
@@ -156,9 +165,13 @@ int Chapter6Example2() {
 	vector<Student_info> did, didnt;
 	classify_did_hw(students, did, didnt);
 
+	cout << "did: " << endl;
+	PrintStudentsData(did);
+	cout << "didnt: " << endl;
+	PrintStudentsData(didnt);
 	//students.sort(compare);
-	grade(students);
-	Students failed_students = classify_iter(students);
+	//grade(students);
+	//Students failed_students = classify_iter(students);
 	// Chapter5 Example 1.1
 	// 인덱스를 사용한 vector 접근 방식
 	//classify_index(students, failed_students);
@@ -166,11 +179,10 @@ int Chapter6Example2() {
 	// iterator를 사용한 vector 접근 방식
 	//classify_iter(students, failed_students);
 
-
-	cout << "passed:" << endl;
-	PrintStudentsData(students);
-	cout << "failed:" << endl;
-	PrintStudentsData(failed_students);
+	//cout << "passed:" << endl;
+	//PrintStudentsData(students);
+	//cout << "failed:" << endl;
+	//PrintStudentsData(failed_students);
 
 	return 0;
 }

@@ -5,6 +5,7 @@
 #include <vector>
 #include <stdexcept>
 #include <list>
+#include <numeric>
 
 #include "median.h"
 #include "student_info.h"
@@ -43,12 +44,21 @@ Student_info random_grade(const string name) {
 	int random_value = (1 + std::rand() % 10);
 	bool statement = (random_value % 2 == 0 ? true : false);
 
-	double homework = random_value * 10;
+	/*double homework = (random_value * 10);
 	double mid = homework + (statement ? 5 : -5);
-	double final = homework + (statement ? -5 : 5);
+	double final = homework + (statement ? -5 : 5);*/
+	double mid = 50;
+	double final = 50;
 
 	vector<double> hw;
-	hw.push_back(random_value * 10);
+	int count = 0;
+	while (count <= 3) {
+		int rand = (1 + std::rand() % 10);
+		hw.push_back(rand * 10);
+		count++;
+	}
+	cout << name << ": " << get_median_value(hw) << endl;
+	//hw.push_back(random_value * 10);
 
 	read_test(record, name, mid, final, hw);
 	return (record);
@@ -191,15 +201,52 @@ void classify_did_hw(const vector<Student_info>& s
 	if (didnt.empty()) {
 		cout << "Every Student did all the homework!" << endl;
 	}
+
+	write_analysis(cout, "median", median_analysis, did, didnt);
+	write_analysis(cout, "average", average_analysis, did, didnt);
+	write_analysis(cout, "median of homework turned in", optimistic_median_analysis, did, didnt);
 }
 
 double median_analysis(const vector<Student_info>& s) {
 	vector<double> grades;
-	//std::transform(s.begin(), s.end(), std::back_inserter(grades), grade_aux);
+	std::transform(s.begin(), s.end(), std::back_inserter(grades), grade_aux);
+	return get_median_value(grades);
+}
+double average(const vector<double>& v) {
+	// accumulate는 numeric 라이브러리에 있는 메서드
+	// Q. 0.0은 무엇인가?
+	// A. double 타입으로 하려고.. 0으로 하면 int로 간주한다고함
+	return (std::accumulate(v.begin(), v.end(), 0.0) / v.size());
+}
+
+double average_grade(const Student_info& s) {
+	return grade(s.midterm, s.final, average(s.homework));
+}
+
+double average_analysis(const vector<Student_info>& s) {
+	vector<double> grades;
+	std::transform(s.begin(), s.end(), back_inserter(grades), average_grade);
 	return get_median_value(grades);
 }
 
-
+double optimistic_median(const Student_info& s) {
+	vector<double> nonzero;
+	// remove_copy는 무엇인가?
+	// iterator를 돌면서 0인 항목을 지우고 
+	// 지워지지 않은 값들은 nonzero에 복사되는거 같네
+	std::remove_copy(s.homework.begin(), s.homework.end(), std::back_inserter(nonzero), 0);
+	if (nonzero.size()) {
+		return grade(s.midterm, s.final, 0);
+	}
+	else {
+		return grade(s.midterm, s.final, get_median_value(nonzero));
+	}
+}
+double optimistic_median_analysis(const vector<Student_info>& s) {
+	vector<double> grades;
+	std::transform(s.begin(), s.end(), back_inserter(grades), optimistic_median);
+	return get_median_value(grades);
+}
 
 // 한발 더 나아가기
 // iterator를 모아놓은 vector로 성적을 산출하는 방법은 어떨까?
