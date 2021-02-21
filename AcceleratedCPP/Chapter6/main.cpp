@@ -107,9 +107,13 @@ vector<string> find_urls(const string& s) {
 	typedef string::const_iterator iter;
 	iter b = s.begin(), e = s.end();
 
+	// string 내에 있는 url들을 하나씩 찾아 ret에 push
 	while (b != e) {
 		b = url_beg(b, e);
 		if (b != e) {
+			// b에서 e까지의 문자열 중 맨 처음 나오는 after까지를 찾아서
+			// [url_beg()]://[url_end(b, e) 를 저장하고
+			// 순차적으로 찾는다
 			iter after = url_end(b, e);
 			ret.push_back(string(b, after));
 			b = after;
@@ -124,6 +128,11 @@ string::const_iterator url_beg(string::const_iterator begin, string::const_itera
 	typedef string::const_iterator iter;
 	iter i = begin;
 
+	// search 는 algorithm 라이브러리에 있는 메서드로
+	// i부터 end까지를 sep의 시작과 끝으로 검색
+	// 가장 먼저 나오는 위치를 찾게 되고
+	// 없으면 마지막 iter(= end)를 리턴하는듯?
+	
 	while ((i = search(i, end, sep.begin(), sep.end())) != end) {
 		if (i != begin && i + sep.size() != end) {
 			// beg는 protocol-name 부분
@@ -146,7 +155,8 @@ string::const_iterator url_end(string::const_iterator begin, string::const_itera
 }
 
 bool not_url_char(char c) {
-	static const string url_char = "~;/?:@=&$?.+!*?),";
+	// 책에 써있는 url_ch가 잘못되어 수정함.
+	static const string url_char = "~;/?:@=&$-_.+!*'(),";
 
 	return !(isalnum(c)
 		|| find(url_char.begin(), url_char.end(), c) != url_char.end());
