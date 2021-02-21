@@ -99,12 +99,78 @@ bool not_url_char(char c);
 int Chapter6Example1_3() {
 	vector<string> vec;
 	vec.push_back("The address of naver is http://www.naver.com you can find a lot of things.");
-	vec.push_back("File transform protocol example address: ftp://open.somewhere.com/files");
-	vec.push_back("empty data");
+	vec.push_back("The address of google is http://www.google.com you can find a lot of things. File transform protocol example address: ftp://open.somewhere.com/files");
+	vec.push_back("empty data://.");
 
 	vector<string> result = find_urls(*(vec.begin() + 1));
 
 	show_strings(result);
+
+	return 0;
+}
+
+bool did_all_hw(const Student_info& s);
+void classify_did_hw(const vector<Student_info>&, vector<Student_info>&, vector<Student_info>&);
+double median_analysis(const vector<Student_info>& s);
+void write_analysis(std::ostream& out
+	, const string& name
+	, double analysis(const vector<Student_info>&)
+	, const vector<Student_info>& did
+	, const vector<Student_info>& didnt) {
+	out << name << ": median(did) = " << analysis(did) <<
+		", median(didnt) = " << analysis(didnt) << endl;
+};
+
+int Chapter6Example2() {
+	Students students;
+
+	Student_info record;
+
+	string::size_type max_length = 0;
+
+	vector<double> hw1;
+	hw1.push_back(10);
+	hw1.push_back(0);
+	hw1.push_back(0);
+	hw1.push_back(40);
+	read_test(record, "kimkm", 100, 100, hw1);
+	max_length = std::max(max_length, record.name.size());
+	students.push_back(record);
+
+	vector<double> hw2;
+	hw2.push_back(50);
+	hw2.push_back(40);
+	hw2.push_back(0);
+	hw2.push_back(40);
+	read_test(record, "kyungmin", 50, 50, hw2);
+	max_length = std::max(max_length, record.name.size());
+	students.push_back(record);
+
+	students.push_back(random_grade("note"));
+	students.push_back(random_grade("alpha"));
+	students.push_back(random_grade("beta"));
+	students.push_back(random_grade("gamma"));
+	students.push_back(random_grade("delta"));
+	students.push_back(random_grade("epsilon"));
+
+	vector<Student_info> did, didnt;
+	classify_did_hw(students, did, didnt);
+
+	//students.sort(compare);
+	grade(students);
+	Students failed_students = classify_iter(students);
+	// Chapter5 Example 1.1
+	// 인덱스를 사용한 vector 접근 방식
+	//classify_index(students, failed_students);
+	// Chapter5 Example 1.2
+	// iterator를 사용한 vector 접근 방식
+	//classify_iter(students, failed_students);
+
+
+	cout << "passed:" << endl;
+	PrintStudentsData(students);
+	cout << "failed:" << endl;
+	PrintStudentsData(failed_students);
 
 	return 0;
 }

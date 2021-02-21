@@ -15,7 +15,8 @@ int main() {
 	//return Chapter6Example1();
 	//return Chapter6Example1_1();
 	//return Chapter6Example1_2();
-	return Chapter6Example1_3();
+	//return Chapter6Example1_3();
+	return Chapter6Example2();
 }
 
 void Greeting(const string name) {
@@ -162,4 +163,45 @@ bool not_url_char(char c) {
 		|| find(url_char.begin(), url_char.end(), c) != url_char.end());
 }
 
+// Chapter6 Example2
+bool did_all_hw(const Student_info& s) {
+	// find로 s.homework에 0이 있는지 찾는다
+	// 없으면 find의 return 값이 s.homework.end() 가 되므로
+	// true를 리턴하게 된다. 즉, 모든 homework를 제출한 것으로
+	return (find(s.homework.begin(), s.homework.end(), 0) == s.homework.end());
+}
+
+void classify_did_hw(const vector<Student_info>& s
+	, vector<Student_info>& did
+	, vector<Student_info>& didnt) {
+	for (vector<Student_info>::const_iterator iter = s.begin();
+		iter != s.end(); ++iter) {
+		
+		if (did_all_hw(*iter)) {
+			did.push_back(*iter);
+		}
+		else {
+			didnt.push_back(*iter);
+		}
+	}
+
+	if (did.empty()) {
+		cout << "No student did all the homework!" << endl;
+	}
+	if (didnt.empty()) {
+		cout << "Every Student did all the homework!" << endl;
+	}
+}
+
+double median_analysis(const vector<Student_info>& s) {
+	vector<double> grades;
+	//std::transform(s.begin(), s.end(), std::back_inserter(grades), grade_aux);
+	return get_median_value(grades);
+}
+
+
+
+// 한발 더 나아가기
+// iterator를 모아놓은 vector로 성적을 산출하는 방법은 어떨까?
+// iterator는 pointer의 특성을 가진 객체이나 둘 사이에는 차이점이 있다 
 

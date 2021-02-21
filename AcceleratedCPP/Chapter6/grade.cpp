@@ -30,3 +30,12 @@ void grade(Students & s) {
 		}
 	}
 }
+
+double grade_aux(Student_info& s) {
+	try {
+		return grade(s);
+	}
+	catch (domain_error) {
+		return grade(s.midterm, s.final, 0);
+	}
+}
