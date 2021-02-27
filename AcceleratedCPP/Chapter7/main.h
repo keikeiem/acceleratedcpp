@@ -2,6 +2,7 @@
 #define METHOD_H
 
 #include <string>
+#include <map>
 
 using std::cin;
 using std::cout;
@@ -14,6 +15,7 @@ using std::vector;
 using std::domain_error;
 
 using std::list;
+using std::map;
 
 void Greeting(const string name);
 string InsertName(void);
@@ -109,6 +111,7 @@ int Chapter6Example1_3() {
 	return 0;
 }
 
+// Chapter6 Example2
 bool did_all_hw(const Student_info& s);
 void classify_did_hw(const vector<Student_info>&, vector<Student_info>&, vector<Student_info>&);
 double median_analysis(const vector<Student_info>& s);
@@ -128,184 +131,38 @@ void write_analysis(std::ostream& out
 		", median(didnt) = " << analysis(didnt) << endl;
 };
 
-int Chapter6Example2() {
-	Students students;
-
-	Student_info record;
-
-	string::size_type max_length = 0;
-
-	vector<double> hw1;
-	hw1.push_back(10);
-	hw1.push_back(0);
-	hw1.push_back(0);
-	hw1.push_back(30);
-	cout << "kyungmin: " << get_median_value(hw1) << endl;
-	read_test(record, "kimkm", 50, 50, hw1);
-	max_length = std::max(max_length, record.name.size());
-	students.push_back(record);
-
-	vector<double> hw2;
-	hw2.push_back(50);
-	hw2.push_back(0);
-	hw2.push_back(0);
-	hw2.push_back(30);
-	cout << "kyungmin: " << get_median_value(hw2) << endl;
-	read_test(record, "kyungmin", 50, 50, hw2);
-	max_length = std::max(max_length, record.name.size());
-	students.push_back(record);
-
-	students.push_back(random_grade("note"));
-	students.push_back(random_grade("alpha"));
-	students.push_back(random_grade("beta"));
-	students.push_back(random_grade("gamma"));
-	students.push_back(random_grade("delta"));
-	students.push_back(random_grade("epsilon"));
-
-	vector<Student_info> did, didnt;
-	classify_did_hw(students, did, didnt);
-
-	cout << "did: " << endl;
-	PrintStudentsData(did);
-	cout << "didnt: " << endl;
-	PrintStudentsData(didnt);
-	//students.sort(compare);
-	//grade(students);
-	//Students failed_students = classify_iter(students);
-	// Chapter5 Example 1.1
-	// 인덱스를 사용한 vector 접근 방식
-	//classify_index(students, failed_students);
-	// Chapter5 Example 1.2
-	// iterator를 사용한 vector 접근 방식
-	//classify_iter(students, failed_students);
-
-	//cout << "passed:" << endl;
-	//PrintStudentsData(students);
-	//cout << "failed:" << endl;
-	//PrintStudentsData(failed_students);
-
-	return 0;
-}
-
+// Chapter6 Example3_1
 vector<Student_info> extract_fails(vector<Student_info>&);
 bool fgrade(const Student_info& s);
 bool pgrade(const Student_info& s);
 void compute_students_grade(Students&);
 
-int Chapter6Example3() {
+// Chapter6 Example3_2
+vector<Student_info> extract_fails_ext(vector<Student_info>&);
 
-	Students students;
+int Chapter7Example2() {
+	// 단어별로 개수를 세려고 함
+	string s;
+	std::map<string, int> counters;
 
-	Student_info record;
+	while (cin >> s)
+		++counters[s];
 
-	string::size_type max_length = 0;
-
-	vector<double> hw1;
-	hw1.push_back(10);
-	hw1.push_back(0);
-	hw1.push_back(0);
-	hw1.push_back(30);
-	cout << "kyungmin: " << get_median_value(hw1) << endl;
-	read_test(record, "kimkm", 50, 50, hw1);
-	max_length = std::max(max_length, record.name.size());
-	students.push_back(record);
-
-	vector<double> hw2;
-	hw2.push_back(50);
-	hw2.push_back(0);
-	hw2.push_back(0);
-	hw2.push_back(30);
-	cout << "kyungmin: " << get_median_value(hw2) << endl;
-	read_test(record, "kyungmin", 50, 50, hw2);
-	max_length = std::max(max_length, record.name.size());
-	students.push_back(record);
-
-	students.push_back(random_grade("note"));
-	students.push_back(random_grade("alpha"));
-	students.push_back(random_grade("beta"));
-	students.push_back(random_grade("gamma"));
-	students.push_back(random_grade("delta"));
-	students.push_back(random_grade("epsilon"));
-
-	// grade 계산부터 하자
-	compute_students_grade(students);
-
-	vector<Student_info> did, didnt;
-	classify_did_hw(students, did, didnt);
-
-	/*cout << "did: " << endl;
-	PrintStudentsData(did);
-	cout << "didnt: " << endl;
-	PrintStudentsData(didnt);*/
-	Students failed_students = extract_fails(students);
-
-	cout << " " << endl;
-	cout << "passed students: " << endl;
-	PrintStudentsData(students);
-
-	cout << " " << endl;
-	cout << "failed students: " << endl;
-	PrintStudentsData(failed_students);
-
+	for (std::map<string, int>::const_iterator iter = counters.begin();
+		iter != counters.end(); ++iter)
+	{
+		cout << iter->first << "\t" << iter->second << endl;            
+	}
 	return 0;
 }
 
-vector<Student_info> extract_fails_ext(vector<Student_info>&);
-int Chapter6Example3_2() {
+map<string, vector<int> > xref(std::istream& in, vector<string> find_words(const string&) = split);
+void show_map_string_with_vint(const map<string, vector<int>>&);
 
-	Students students;
-
-	Student_info record;
-
-	string::size_type max_length = 0;
-
-	vector<double> hw1;
-	hw1.push_back(10);
-	hw1.push_back(0);
-	hw1.push_back(0);
-	hw1.push_back(30);
-	cout << "kyungmin: " << get_median_value(hw1) << endl;
-	read_test(record, "kimkm", 50, 50, hw1);
-	max_length = std::max(max_length, record.name.size());
-	students.push_back(record);
-
-	vector<double> hw2;
-	hw2.push_back(50);
-	hw2.push_back(0);
-	hw2.push_back(0);
-	hw2.push_back(30);
-	cout << "kyungmin: " << get_median_value(hw2) << endl;
-	read_test(record, "kyungmin", 50, 50, hw2);
-	max_length = std::max(max_length, record.name.size());
-	students.push_back(record);
-
-	students.push_back(random_grade("note"));
-	students.push_back(random_grade("alpha"));
-	students.push_back(random_grade("beta"));
-	students.push_back(random_grade("gamma"));
-	students.push_back(random_grade("delta"));
-	students.push_back(random_grade("epsilon"));
-
-	// grade 계산부터 하자
-	compute_students_grade(students);
-
-	vector<Student_info> did, didnt;
-	classify_did_hw(students, did, didnt);
-
-	/*cout << "did: " << endl;
-	PrintStudentsData(did);
-	cout << "didnt: " << endl;
-	PrintStudentsData(didnt);*/
-	Students failed_students = extract_fails_ext(students);
-
-	cout << " " << endl;
-	cout << "passed students: " << endl;
-	PrintStudentsData(students);
-
-	cout << " " << endl;
-	cout << "failed students: " << endl;
-	PrintStudentsData(failed_students);
-
+int Chapter7Example3() {
+	// 교차 참조 테이블?
+	map<string, vector<int>> item = xref(cin, find_urls);
+	show_map_string_with_vint(item);
 	return 0;
 }
 

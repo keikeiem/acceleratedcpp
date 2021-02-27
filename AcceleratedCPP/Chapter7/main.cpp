@@ -14,17 +14,8 @@
 #include "problem.h"
 
 int main() {
-	//return Chapter6Example1();
-	//return Chapter6Example1_1();
-	//return Chapter6Example1_2();
-	//return Chapter6Example1_3();
-	//return Chapter6Example2();
-	//return Chapter6Example3();
-	//return Chapter6Example3_2();
-
-	//return Chapter6Problem2();
-	//return Chapter6Problem3();
-	return Chapter6Problem9();
+	//return Chapter7Example2();
+	return Chapter7Example3();
 }
 
 void Greeting(const string name) {
@@ -293,3 +284,45 @@ Students extract_fails_ext(Students& s) {
 	return fails;
 }
 
+// Chapter7 Example 3
+map<string, vector<int> > xref(std::istream& in, vector<string> find_words(const string&))
+{
+	string line;
+	int line_number = 0;
+	map<string, vector<int> > ret;
+
+	while (std::getline(in, line))
+	{
+		++line_number;
+
+		// 라인을 단어별로 쪼개기
+		vector<string> words = find_words(line);
+
+		// 각 단어가 현재 라인에 나타났는지 기록
+		for (vector<string>::iterator iter = words.begin(); iter != words.end(); ++iter)
+		{
+			ret[(*iter)].push_back(line_number);
+		}
+	}	
+	return ret;
+}
+
+void show_map_string_with_vint(const map<string, vector<int> >& m)
+{
+	int count = 0;
+	for (map<string, vector<int> >::const_iterator iter = m.begin(); iter != m.end(); ++iter)
+	{
+		cout << iter->first << ":" << endl;
+		count = 0;
+		for (vector<int>::const_iterator iter_int = iter->second.begin();
+			iter_int != iter->second.end(); ++iter_int)
+		{
+			if (count > 0)
+				cout << " | ";
+
+			cout << (*iter_int);
+			count++;
+		}
+		cout << endl;
+	}
+}
