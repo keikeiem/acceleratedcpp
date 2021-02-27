@@ -41,7 +41,7 @@ std::istream & read_homework(std::istream& in, vector<double> & hw) {
 
 void PrintStudentsData(Students & students) {
 	for (auto iter = students.begin(); iter != students.end(); iter++) {
-		cout << (*iter).name << " | "
+		cout << (*iter).name << " (" << (*iter).grade << ") | "
 			<< (*iter).midterm << " | "
 			<< (*iter).final << endl;
 		cout << "Homework: ";

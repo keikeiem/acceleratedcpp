@@ -11,13 +11,20 @@
 #include "student_info.h"
 #include "grade.h"
 #include "main.h"
+#include "problem.h"
 
 int main() {
 	//return Chapter6Example1();
 	//return Chapter6Example1_1();
 	//return Chapter6Example1_2();
 	//return Chapter6Example1_3();
-	return Chapter6Example2();
+	//return Chapter6Example2();
+	//return Chapter6Example3();
+	//return Chapter6Example3_2();
+
+	//return Chapter6Problem2();
+	//return Chapter6Problem3();
+	return Chapter6Problem9();
 }
 
 void Greeting(const string name) {
@@ -251,4 +258,38 @@ double optimistic_median_analysis(const vector<Student_info>& s) {
 // 한발 더 나아가기
 // iterator를 모아놓은 vector로 성적을 산출하는 방법은 어떨까?
 // iterator는 pointer의 특성을 가진 객체이나 둘 사이에는 차이점이 있다 
+
+
+// Chapter6 Example 3
+vector<Student_info> extract_fails(vector<Student_info>& students) {
+	vector<Student_info> fails;
+	std::remove_copy_if(students.begin(), students.end(), std::back_inserter(fails), pgrade);
+	 
+	students.erase(std::remove_if(students.begin(), students.end(), fgrade), students.end());
+
+	return fails;
+}
+
+bool fgrade(const Student_info& s) {
+	return (grade(s) < 50);
+}
+
+bool pgrade(const Student_info& s) {
+	return (!fgrade(s));
+}
+
+void compute_students_grade(Students& s) {
+	for (Students::iterator iter = s.begin(); iter != s.end(); ++iter)
+	{
+		grade(*iter);
+	}
+}
+
+// Chapter6 Example 3 - 2
+Students extract_fails_ext(Students& s) {
+	Students::iterator iter = std::stable_partition(s.begin(), s.end(), pgrade);
+	Students fails(iter, s.end());
+	s.erase(iter, s.end());
+	return fails;
+}
 

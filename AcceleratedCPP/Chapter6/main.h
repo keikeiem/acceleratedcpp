@@ -187,4 +187,126 @@ int Chapter6Example2() {
 	return 0;
 }
 
+vector<Student_info> extract_fails(vector<Student_info>&);
+bool fgrade(const Student_info& s);
+bool pgrade(const Student_info& s);
+void compute_students_grade(Students&);
+
+int Chapter6Example3() {
+
+	Students students;
+
+	Student_info record;
+
+	string::size_type max_length = 0;
+
+	vector<double> hw1;
+	hw1.push_back(10);
+	hw1.push_back(0);
+	hw1.push_back(0);
+	hw1.push_back(30);
+	cout << "kyungmin: " << get_median_value(hw1) << endl;
+	read_test(record, "kimkm", 50, 50, hw1);
+	max_length = std::max(max_length, record.name.size());
+	students.push_back(record);
+
+	vector<double> hw2;
+	hw2.push_back(50);
+	hw2.push_back(0);
+	hw2.push_back(0);
+	hw2.push_back(30);
+	cout << "kyungmin: " << get_median_value(hw2) << endl;
+	read_test(record, "kyungmin", 50, 50, hw2);
+	max_length = std::max(max_length, record.name.size());
+	students.push_back(record);
+
+	students.push_back(random_grade("note"));
+	students.push_back(random_grade("alpha"));
+	students.push_back(random_grade("beta"));
+	students.push_back(random_grade("gamma"));
+	students.push_back(random_grade("delta"));
+	students.push_back(random_grade("epsilon"));
+
+	// grade 계산부터 하자
+	compute_students_grade(students);
+
+	vector<Student_info> did, didnt;
+	classify_did_hw(students, did, didnt);
+
+	/*cout << "did: " << endl;
+	PrintStudentsData(did);
+	cout << "didnt: " << endl;
+	PrintStudentsData(didnt);*/
+	Students failed_students = extract_fails(students);
+
+	cout << " " << endl;
+	cout << "passed students: " << endl;
+	PrintStudentsData(students);
+
+	cout << " " << endl;
+	cout << "failed students: " << endl;
+	PrintStudentsData(failed_students);
+
+	return 0;
+}
+
+vector<Student_info> extract_fails_ext(vector<Student_info>&);
+int Chapter6Example3_2() {
+
+	Students students;
+
+	Student_info record;
+
+	string::size_type max_length = 0;
+
+	vector<double> hw1;
+	hw1.push_back(10);
+	hw1.push_back(0);
+	hw1.push_back(0);
+	hw1.push_back(30);
+	cout << "kyungmin: " << get_median_value(hw1) << endl;
+	read_test(record, "kimkm", 50, 50, hw1);
+	max_length = std::max(max_length, record.name.size());
+	students.push_back(record);
+
+	vector<double> hw2;
+	hw2.push_back(50);
+	hw2.push_back(0);
+	hw2.push_back(0);
+	hw2.push_back(30);
+	cout << "kyungmin: " << get_median_value(hw2) << endl;
+	read_test(record, "kyungmin", 50, 50, hw2);
+	max_length = std::max(max_length, record.name.size());
+	students.push_back(record);
+
+	students.push_back(random_grade("note"));
+	students.push_back(random_grade("alpha"));
+	students.push_back(random_grade("beta"));
+	students.push_back(random_grade("gamma"));
+	students.push_back(random_grade("delta"));
+	students.push_back(random_grade("epsilon"));
+
+	// grade 계산부터 하자
+	compute_students_grade(students);
+
+	vector<Student_info> did, didnt;
+	classify_did_hw(students, did, didnt);
+
+	/*cout << "did: " << endl;
+	PrintStudentsData(did);
+	cout << "didnt: " << endl;
+	PrintStudentsData(didnt);*/
+	Students failed_students = extract_fails_ext(students);
+
+	cout << " " << endl;
+	cout << "passed students: " << endl;
+	PrintStudentsData(students);
+
+	cout << " " << endl;
+	cout << "failed students: " << endl;
+	PrintStudentsData(failed_students);
+
+	return 0;
+}
+
 #endif

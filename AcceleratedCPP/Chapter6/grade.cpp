@@ -17,6 +17,7 @@ double grade(double midterm, double final, const vector<double> & hw) {
 
 double grade(Student_info & s) {
 	s.grade = grade(s.midterm, s.final, s.homework);
+	std::cout << s.name << " | " << s.grade << std::endl;
 	return (s.grade);
 }
 
