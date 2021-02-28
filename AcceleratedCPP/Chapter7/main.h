@@ -17,6 +17,12 @@ using std::domain_error;
 using std::list;
 using std::map;
 
+//typedef vector<string> Rule;
+//typedef vector<Rule> Rule_collection;
+typedef list<string> Rule;
+typedef list<Rule> Rule_collection;
+typedef map<string, Rule_collection> Grammar;
+
 void Greeting(const string name);
 string InsertName(void);
 
@@ -24,19 +30,19 @@ void read_test(Student_info& s, const string name, const double midterm, const d
 Student_info random_grade(const string name);
 Students classify_iter(Students& s); // list case
 
-void show_strings(const vector<string>& v) {
+void show_strings(const Rule& v) {
 	cout << "vec: " << endl;
-	for (vector<string>::const_iterator iter = v.begin(); iter != v.end(); ++iter) {
+	for (Rule::const_iterator iter = v.begin(); iter != v.end(); ++iter) {
 		cout << "\t" << (*iter) << endl;
 	}
 }
 
 int Chapter6Example1() {
-	vector<string> vec;
+	Rule vec;
 	vec.push_back("front1");
 	vec.push_back("front2");
 	vec.push_back("front3");
-	vector<string> bottom;
+	Rule bottom;
 	bottom.push_back("bottom1");
 	bottom.push_back("bottom2");
 	bottom.push_back("bottom3");
@@ -44,9 +50,9 @@ int Chapter6Example1() {
 	// vec.insert(vec.end(), bottom.begin(), bottom.end());
 	//vec.insert((vec.begin() + 1), bottom.begin(), bottom.end());
 
-	vector<string>::iterator begin = bottom.begin();
-	vector<string>::iterator end = bottom.end();
-	std::back_insert_iterator<vector<string>> out = std::back_inserter(vec);
+	Rule::iterator begin = bottom.begin();
+	Rule::iterator end = bottom.end();
+	std::back_insert_iterator<Rule> out = std::back_inserter(vec);
 
 	while (begin != end) {
 		*out++ = *begin++;
@@ -60,12 +66,12 @@ int Chapter6Example1() {
 
 bool space(char c);
 bool not_space(char c);
-vector<string> split(const string& s);
+Rule split(const string& s);
 
 int Chapter6Example1_1() {
 	string str = "Notorious Biggie Small";
 
-	vector<string> result = split(str);
+	Rule result = split(str);
 	show_strings(result);
 	return 0;
 }
@@ -75,15 +81,15 @@ bool is_palindrome(const string& s) {
 }
 
 int Chapter6Example1_2() {
-	vector<string> vec;
+	Rule vec;
 	vec.push_back("civic");
 	vec.push_back("banana");
 	vec.push_back("level");
 	vec.push_back("mother");
 	vec.push_back("madam");
 
-	vector<string> ret;
-	for (vector<string>::const_iterator iter = vec.begin(); iter != vec.end(); ++iter) {
+	Rule ret;
+	for (Rule::const_iterator iter = vec.begin(); iter != vec.end(); ++iter) {
 		if (is_palindrome(*iter))
 			ret.push_back(*iter);
 	}
@@ -93,18 +99,18 @@ int Chapter6Example1_2() {
 	return 0;
 }
 
-vector<string> find_urls(const string& s);
+Rule find_urls(const string& s);
 typedef string::const_iterator siter;
 string::const_iterator url_beg(string::const_iterator, string::const_iterator);
 string::const_iterator url_end(string::const_iterator, string::const_iterator);
 bool not_url_char(char c);
 int Chapter6Example1_3() {
-	vector<string> vec;
+	Rule vec;
 	vec.push_back("The address of naver is http://www.naver.com you can find a lot of things.");
 	vec.push_back("The address of google is http://www.google.com you can find a lot of things. File transform protocol example address: ftp://open.somewhere.com/files");
 	vec.push_back("empty data://.");
 
-	vector<string> result = find_urls(*(vec.begin() + 1));
+	Rule result = find_urls(*(vec.begin()++));
 
 	show_strings(result);
 
@@ -156,7 +162,7 @@ int Chapter7Example2() {
 	return 0;
 }
 
-map<string, vector<int> > xref(std::istream& in, vector<string> find_words(const string&) = split);
+map<string, vector<int> > xref(std::istream& in, Rule find_words(const string&) = split);
 void show_map_string_with_vint(const map<string, vector<int>>&);
 
 int Chapter7Example3() {
@@ -166,15 +172,13 @@ int Chapter7Example3() {
 	return 0;
 }
 
-typedef vector<string> Rule;
-typedef vector<Rule> Rule_collection;
-typedef map<string, Rule_collection> Grammar;
+// Grammar 등에 대한 typedef는 상단에 선언함
 Grammar read_grammar(std::istream& cin);
 void show_map_string_with_vstring(const Grammar& item);
 
-vector<string> gen_sentence(const Grammar& g);
+Rule gen_sentence(const Grammar& g);
 bool bracketed(const string& s);
-void gen_aux(const Grammar& g, const string& word, vector<string>& v);
+void gen_aux(const Grammar& g, const string& word, Rule& v);
 int nrand(const int n, bool print = false);
 
 void read_grammar_for_test(Grammar& g, const Rule& r);
@@ -215,9 +219,9 @@ int Chapter7Example4() {
 	// 여러번 선언하면 오류나므로 한 번만!
 	srand(time(NULL));
 
-	vector<string> result = gen_sentence(grammar);
+	Rule result = gen_sentence(grammar);
 
-	vector<string>::const_iterator it = result.begin();
+	Rule::const_iterator it = result.begin();
 	if (!result.empty()) {
 		cout << *it;
 		++it;

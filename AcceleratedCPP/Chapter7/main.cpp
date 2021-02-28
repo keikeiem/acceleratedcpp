@@ -16,7 +16,11 @@
 int main() {
 	//return Chapter7Example2();
 	//return Chapter7Example3();
-	return Chapter7Example4();
+	//return Chapter7Example4();
+
+	//return Chapter7Problem1();
+	return Chapter7Problem5();
+	//return Chapter7Problem9();
 }
 
 void Greeting(const string name) {
@@ -92,8 +96,8 @@ bool not_space(char c) {
 	return !(isspace(c));
 }
 
-vector<string> split(const string& s) {
-	vector<string> ret;
+Rule split(const string& s) {
+	Rule ret;
 	typedef string::const_iterator iter;
 	iter i = s.begin();
 
@@ -112,8 +116,8 @@ vector<string> split(const string& s) {
 }
 
 // Chapter6 Example 1-3
-vector<string> find_urls(const string& s) {
-	vector<string> ret;
+Rule find_urls(const string& s) {
+	Rule ret;
 	typedef string::const_iterator iter;
 	iter b = s.begin(), e = s.end();
 
@@ -333,12 +337,13 @@ Grammar read_grammar(std::istream& cin) {
 	Grammar ret;
 	string line;
 	while (std::getline(cin, line)) {
-		vector<string> entry = split(line);
+		Rule entry = split(line);
 
 		if (!entry.empty())
 		{
-			ret[entry[0]].push_back(
-				Rule(entry.begin() + 1, entry.end())
+			Rule::iterator iter = entry.begin();
+			ret[(*iter)].push_back(
+				Rule(++iter, entry.end())
 			);
 		}
 	}
@@ -351,7 +356,7 @@ void show_map_string_with_vstring(const Grammar& item) {
 	{
 		count = 0;
 		cout << iter->first << ":" << endl;
-		for (vector<Rule>::const_iterator iter_rule = iter->second.begin();
+		for (Rule_collection::const_iterator iter_rule = iter->second.begin();
 			iter_rule != iter->second.end(); ++iter_rule)
 		{
 			if (count > 0)
@@ -367,9 +372,9 @@ void show_map_string_with_vstring(const Grammar& item) {
 	}
 }
 
-vector<string> gen_sentence(const Grammar& g) {
+Rule gen_sentence(const Grammar& g) {
 	// 문장을 만드는 메서드
-	vector<string> ret;
+	Rule ret;
 	gen_aux(g, "<sentence>", ret);
 	return ret;
 }
@@ -378,7 +383,7 @@ bool bracketed(const string& s) {
 	return (s.size() > 1 && s[0] == '<' && s[s.size() - 1] == '>');
 }
 
-void gen_aux(const Grammar& g, const string& word, vector<string>& ret) {
+void gen_aux(const Grammar& g, const string& word, Rule& ret) {
 	// g에서 word에 해당하는 값을 뽑아내서 v에 넣는다
 	if (!bracketed(word))
 	{
@@ -393,8 +398,17 @@ void gen_aux(const Grammar& g, const string& word, vector<string>& ret) {
 		const Rule_collection& c = iter->second;
 
 		//cout << iter->first << "nrand: " << c.size() << " | " << nrand(c.size()) << endl;
-		const Rule& r = c[nrand(c.size())];
+		Rule_collection::const_iterator iter_rc = c.begin();
+		int count = 0;
+		int random_number = nrand(c.size());
+		while (count < random_number)
+		{
+			iter_rc++;
+			count++;
+		}
 
+		
+		const Rule& r = (*iter_rc);
 		for (Rule::const_iterator iter_rule = r.begin();
 			iter_rule != r.end(); ++iter_rule)
 		{
@@ -404,10 +418,10 @@ void gen_aux(const Grammar& g, const string& word, vector<string>& ret) {
 }
 
 int nrand(const int n, bool print) {
-	if (n <= 0 || n > RAND_MAX)
+	if (n <= 0)
 		throw domain_error("Argument to nrand is out of range");
 
-	const int bucket_size = RAND_MAX / n;
+	const int bucket_size = (n > RAND_MAX ? 1 : RAND_MAX / n);
 
 	int ret;
 	do ret = rand() / bucket_size;
@@ -423,12 +437,14 @@ void read_grammar_for_test(Grammar& g, const Rule& r) {
 
 	for (Rule::const_iterator iter = r.begin(); iter != r.end(); ++iter)
 	{
-		vector<string> entry = split(*iter);
+		Rule entry = split(*iter);
 
 		if (!entry.empty())
 		{
-			g[entry[0]].push_back(
-				Rule(entry.begin() + 1, entry.end())
+			//Rule::const_iterator it = ++entry.begin();
+
+			g[*(entry.begin())].push_back(
+				Rule(entry.begin(), entry.end())
 			);
 		}
 	}
