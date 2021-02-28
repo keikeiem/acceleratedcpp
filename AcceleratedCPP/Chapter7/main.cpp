@@ -15,7 +15,8 @@
 
 int main() {
 	//return Chapter7Example2();
-	return Chapter7Example3();
+	//return Chapter7Example3();
+	return Chapter7Example4();
 }
 
 void Greeting(const string name) {
@@ -324,5 +325,111 @@ void show_map_string_with_vint(const map<string, vector<int> >& m)
 			count++;
 		}
 		cout << endl;
+	}
+}
+
+// Chapter7 Example4
+Grammar read_grammar(std::istream& cin) {
+	Grammar ret;
+	string line;
+	while (std::getline(cin, line)) {
+		vector<string> entry = split(line);
+
+		if (!entry.empty())
+		{
+			ret[entry[0]].push_back(
+				Rule(entry.begin() + 1, entry.end())
+			);
+		}
+	}
+	return ret;
+}
+
+void show_map_string_with_vstring(const Grammar& item) {
+	int count = 0;
+	for (Grammar::const_iterator iter = item.begin(); iter != item.end(); ++iter)
+	{
+		count = 0;
+		cout << iter->first << ":" << endl;
+		for (vector<Rule>::const_iterator iter_rule = iter->second.begin();
+			iter_rule != iter->second.end(); ++iter_rule)
+		{
+			if (count > 0)
+				cout << ", ";
+			for (Rule::const_iterator it = (*iter_rule).begin();
+				it != (*iter_rule).end(); ++it)
+			{
+				cout << (*it);
+			}
+			count++;
+		}
+		cout << endl;
+	}
+}
+
+vector<string> gen_sentence(const Grammar& g) {
+	// 문장을 만드는 메서드
+	vector<string> ret;
+	gen_aux(g, "<sentence>", ret);
+	return ret;
+}
+bool bracketed(const string& s) {
+	// <noun>, <verb> 와 같이 rule에 해당하는 값 여부를 판단하는 함수
+	return (s.size() > 1 && s[0] == '<' && s[s.size() - 1] == '>');
+}
+
+void gen_aux(const Grammar& g, const string& word, vector<string>& ret) {
+	// g에서 word에 해당하는 값을 뽑아내서 v에 넣는다
+	if (!bracketed(word))
+	{
+		ret.push_back(word);
+	}
+	else
+	{
+		Grammar::const_iterator iter = g.find(word);
+		if (iter == g.end())
+			throw std::logic_error("empty rule");
+
+		const Rule_collection& c = iter->second;
+
+		//cout << iter->first << "nrand: " << c.size() << " | " << nrand(c.size()) << endl;
+		const Rule& r = c[nrand(c.size())];
+
+		for (Rule::const_iterator iter_rule = r.begin();
+			iter_rule != r.end(); ++iter_rule)
+		{
+			gen_aux(g, (*iter_rule), ret);
+		}
+	}
+}
+
+int nrand(const int n, bool print) {
+	if (n <= 0 || n > RAND_MAX)
+		throw domain_error("Argument to nrand is out of range");
+
+	const int bucket_size = RAND_MAX / n;
+
+	int ret;
+	do ret = rand() / bucket_size;
+	while (ret >= n);
+
+	if (print)
+		cout << "random number: " << ret << endl;
+
+	return ret;
+}
+
+void read_grammar_for_test(Grammar& g, const Rule& r) {
+
+	for (Rule::const_iterator iter = r.begin(); iter != r.end(); ++iter)
+	{
+		vector<string> entry = split(*iter);
+
+		if (!entry.empty())
+		{
+			g[entry[0]].push_back(
+				Rule(entry.begin() + 1, entry.end())
+			);
+		}
 	}
 }

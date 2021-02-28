@@ -166,4 +166,69 @@ int Chapter7Example3() {
 	return 0;
 }
 
+typedef vector<string> Rule;
+typedef vector<Rule> Rule_collection;
+typedef map<string, Rule_collection> Grammar;
+Grammar read_grammar(std::istream& cin);
+void show_map_string_with_vstring(const Grammar& item);
+
+vector<string> gen_sentence(const Grammar& g);
+bool bracketed(const string& s);
+void gen_aux(const Grammar& g, const string& word, vector<string>& v);
+int nrand(const int n, bool print = false);
+
+void read_grammar_for_test(Grammar& g, const Rule& r);
+
+int Chapter7Example4() {
+	// 무작위로 문장을 만드는 예제
+	//Grammar grammar_ = read_grammar(cin);	
+	// show_map_string_with_vstring(grammar_);
+
+	Rule lines;
+	lines.push_back("<noun> cat");
+	lines.push_back("<noun> dog");
+	lines.push_back("<noun> table");
+
+	lines.push_back("<noun-phrase> <noun>");
+	lines.push_back("<noun-phrase> <adjective> <noun-phrase>");
+
+	lines.push_back("<adjective> large");
+	lines.push_back("<adjective> brown");
+	lines.push_back("<adjective> absurd");
+
+	lines.push_back("<verb> jumps");
+	lines.push_back("<verb> sits");
+
+	lines.push_back("<location> on the stairs");
+	lines.push_back("<location> under the sky");
+	lines.push_back("<location> wherever it wants");
+
+	lines.push_back("<sentence> the <noun-phrase> <verb> <location>");
+
+	Grammar grammar;
+	read_grammar_for_test(grammar, lines);
+
+	show_map_string_with_vstring(grammar);
+
+	// nrand() 에서 항상 같은 값을 리턴하기에
+	// 아래와같이 srand를 선언해줘야함 <time.h>
+	// 여러번 선언하면 오류나므로 한 번만!
+	srand(time(NULL));
+
+	vector<string> result = gen_sentence(grammar);
+
+	vector<string>::const_iterator it = result.begin();
+	if (!result.empty()) {
+		cout << *it;
+		++it;
+	}
+
+	while (it != result.end())
+	{
+		cout << " " << (*it);
+		++it;
+	}
+	return 0;
+}
+
 #endif
