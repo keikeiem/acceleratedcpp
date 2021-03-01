@@ -20,7 +20,6 @@ int main() {
 
 	//return Chapter7Problem1();
 	//return Chapter7Problem5();
-	return Chapter7Problem6();
 	//return Chapter7Problem9();
 }
 
