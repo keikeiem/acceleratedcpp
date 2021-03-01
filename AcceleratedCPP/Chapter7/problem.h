@@ -2,6 +2,7 @@
 #define PROBLEM_H
 
 #include <string>
+#include <random>
 
 using std::cin;
 using std::cout;
@@ -122,8 +123,11 @@ int Chapter7Problem5() {
 
 	lines.push_back("<sentence> the <noun-phrase> <verb> <location>");
 
+	//Grammar grammar = read_grammar(cin);
 	Grammar grammar;
 	read_grammar_for_test(grammar, lines);
+
+	//Grammar grammar = read_grammar_on_book(cin);
 
 	show_map_string_with_vstring(grammar);
 
@@ -146,6 +150,18 @@ int Chapter7Problem5() {
 		++it;
 	}
 	return 0;
+}
+
+int nrand_ext(int n, bool print) {
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_int_distribution<int> dis(0, n);
+
+	int ret = dis(gen);
+	if (print)
+		cout << ret << endl;
+
+	return ret;
 }
 
 int Chapter7Problem9() {

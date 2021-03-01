@@ -19,7 +19,8 @@ int main() {
 	//return Chapter7Example4();
 
 	//return Chapter7Problem1();
-	return Chapter7Problem5();
+	//return Chapter7Problem5();
+	return Chapter7Problem6();
 	//return Chapter7Problem9();
 }
 
@@ -290,7 +291,7 @@ Students extract_fails_ext(Students& s) {
 }
 
 // Chapter7 Example 3
-map<string, vector<int> > xref(std::istream& in, vector<string> find_words(const string&))
+map<string, vector<int> > xref(std::istream& in, Rule find_words(const string&))
 {
 	string line;
 	int line_number = 0;
@@ -301,10 +302,10 @@ map<string, vector<int> > xref(std::istream& in, vector<string> find_words(const
 		++line_number;
 
 		// 라인을 단어별로 쪼개기
-		vector<string> words = find_words(line);
+		Rule words = find_words(line);
 
 		// 각 단어가 현재 라인에 나타났는지 기록
-		for (vector<string>::iterator iter = words.begin(); iter != words.end(); ++iter)
+		for (Rule::iterator iter = words.begin(); iter != words.end(); ++iter)
 		{
 			ret[(*iter)].push_back(line_number);
 		}
@@ -343,7 +344,8 @@ Grammar read_grammar(std::istream& cin) {
 		{
 			Rule::iterator iter = entry.begin();
 			ret[(*iter)].push_back(
-				Rule(++iter, entry.end())
+				//Rule(entry.begin(), entry.end())
+				entry
 			);
 		}
 	}
@@ -373,7 +375,8 @@ void show_map_string_with_vstring(const Grammar& item) {
 }
 
 Rule gen_sentence(const Grammar& g) {
-	// 문장을 만드는 메서드
+	// 문장을 만드는 메서드	
+
 	Rule ret;
 	gen_aux(g, "<sentence>", ret);
 	return ret;
@@ -399,6 +402,7 @@ void gen_aux(const Grammar& g, const string& word, Rule& ret) {
 
 		//cout << iter->first << "nrand: " << c.size() << " | " << nrand(c.size()) << endl;
 		Rule_collection::const_iterator iter_rc = c.begin();
+
 		int count = 0;
 		int random_number = nrand(c.size());
 		while (count < random_number)
@@ -441,11 +445,34 @@ void read_grammar_for_test(Grammar& g, const Rule& r) {
 
 		if (!entry.empty())
 		{
-			//Rule::const_iterator it = ++entry.begin();
+			Rule::const_iterator it = entry.begin();
 
-			g[*(entry.begin())].push_back(
-				Rule(entry.begin(), entry.end())
-			);
+			Rule word;
+			while (it != entry.end()) {
+				it++;
+				if (it == entry.end())
+					break;
+
+				word.push_back(*it);
+			}
+
+			g[*(entry.begin())].push_back(word);
 		}
 	}
+}
+
+Grammar read_grammar_on_book(std::istream& in) {
+	Grammar ret;
+	string line;
+	while (std::getline(in, line))
+	{
+		vector<string> entry = split(line);
+
+		Rule test = Rule(entry.begin() + 1, entry.end());
+
+		if (!entry.empty())
+			ret[entry[0]].push_back(Rule(entry.begin() + 1, entry.end()));
+	}
+
+	return ret;
 }

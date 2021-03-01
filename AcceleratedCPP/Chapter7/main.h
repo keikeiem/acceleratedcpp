@@ -17,10 +17,10 @@ using std::domain_error;
 using std::list;
 using std::map;
 
-//typedef vector<string> Rule;
-//typedef vector<Rule> Rule_collection;
-typedef list<string> Rule;
-typedef list<Rule> Rule_collection;
+typedef vector<string> Rule;
+typedef vector<Rule> Rule_collection;
+//typedef list<string> Rule;
+//typedef list<Rule> Rule_collection;
 typedef map<string, Rule_collection> Grammar;
 
 void Greeting(const string name);
@@ -217,7 +217,7 @@ int Chapter7Example4() {
 	// nrand() 에서 항상 같은 값을 리턴하기에
 	// 아래와같이 srand를 선언해줘야함 <time.h>
 	// 여러번 선언하면 오류나므로 한 번만!
-	srand(time(NULL));
+	srand((unsigned int)time(NULL));
 
 	Rule result = gen_sentence(grammar);
 
