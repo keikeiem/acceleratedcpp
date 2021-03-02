@@ -13,5 +13,7 @@
 #include "main.h"
 
 int main() {
-	return 0;
+	// return Chapter8Example1();
+	//return Chapter8Example2();
+	return Chapter8Example2_list();
 }
