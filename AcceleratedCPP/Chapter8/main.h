@@ -245,4 +245,70 @@ int Chapter8Example2_list() {
 
 	return 0;
 }
+
+int Chapter8Example3() {
+	vector<string> vec;
+	vec.push_back("test");
+
+	// container를 의미함
+	std::back_insert_iterator<vector<string>> iter = std::back_inserter(vec);
+
+	vector<string> test;
+	test.push_back("a");
+	test.push_back("b");
+	test.push_back("3");
+	std::copy(test.begin(), test.end(), iter);
+
+	for (vector<string>::const_iterator it = vec.begin(); it != vec.end(); ++it)
+	{
+		cout << (*it) << endl;
+	}
+
+	vector<int> v;
+	// istream_iterator로 바로 입력받은 것을 v에 복사하기
+	// 두 번쨰 인자가 void인 것은 end()를 가리키고 있음을 의미함
+	std::copy(std::istream_iterator<int>(cin), std::istream_iterator<int>(), std::back_inserter(v));
+	for (vector<int>::const_iterator it = v.begin(); it != v.end(); ++it)
+	{
+		cout << (*it) << endl;
+	}
+
+	// ostream_iterator로 바로 출력하기
+	std::copy(v.begin(), v.end(), std::ostream_iterator<int>(cout, " "));
+	return 0;
+}
+
+bool space(char c);
+bool not_space(char c);
+template <class Out>
+void split(const string& str, Out os) {
+	typedef string::const_iterator iter;
+
+	iter i = str.begin();
+	while (i != str.end()) {
+		i = std::find_if(i, str.end(), not_space);
+
+		iter j = std::find_if(i, str.end(), space);
+
+		if (i != str.end())
+		{
+			*os++ = string(i, j);
+		}
+		i = j;
+	}
+}
+
+int Chapter8Example4() {
+	string s = "Sometimes things happen that are just out of your control";
+
+	list<string> word_list;
+	split(s, std::back_inserter(word_list));
+
+	for (list<string>::const_iterator iter = word_list.begin(); iter != word_list.end(); ++iter)
+		cout << (*iter) << endl;
+
+	split(s, std::ostream_iterator<string>(cout, ","));
+
+	return 0;
+}
 #endif
