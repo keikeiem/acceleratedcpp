@@ -120,7 +120,11 @@ template <class Ran, class X>
 // Range, Value
 bool binary_search_item(Ran begin, Ran end, const X& x) {
 	while (begin != end) {
+
+		int test = (end - begin + 1);
+		Ran ttt = begin + test / 2;
 		Ran mid = begin + (end - begin) / 2;
+		//Ran mid = (begin + end) / 2;
 		if (x < *mid)
 		{
 			end = mid;

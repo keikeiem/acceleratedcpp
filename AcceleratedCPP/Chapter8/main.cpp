@@ -15,12 +15,13 @@
 
 int main() {
 	// return Chapter8Example1();
-	// return Chapter8Example2();
+	 // return Chapter8Example2();
 	// return Chapter8Example2_list();
 	// return Chapter8Example3();
 	// return Chapter8Example4();
 
-	return Chapter8Problem1();
+	//return Chapter8Problem1();
+	 return Chapter8Problem7();
 }
 
 bool space(char c) {

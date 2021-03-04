@@ -88,4 +88,48 @@ int Chapter8Problem1() {
 	return 0;
 }
 
+int Chapter8Problem7() {
+	//
+	int a = 100;
+	double b = 100.00;
+	float c = 100.0;
+	char d = 'a';
+
+	string e = "A";
+	string f = "B";
+
+	cout << "TT: " << (e > f) << endl;
+
+	cout << (a == b) << endl;
+	cout << (b == c) << endl;
+	cout << (c == a) << endl;
+
+	bool test = false;
+	if (a < (int)d) {
+		test = true;
+	} else {
+		test = false;
+	}
+
+	cout << test << endl;
+
+	// 서로 다른 자료형끼리 부등호를 통한 bool 값을 가져올 수가 없을
+	// 수도 있다.
+
+	return 0;
+}
+
+int Chapter8Problem8() {
+	// binary search 에서
+	// 왜 간단하게 (begin + end) / 2 를 쓰지 않고
+	// begin + (end - begin) / 2 를 사용하는가?
+
+	// begin + end는 반복자의 위치가 벗어나기 때문에?
+	// iterator 끼리 더하기 연산이 안되는데 ...
+	// (end - begin) 의 결과값이 integer 로 전체 개수를 나타냄
+	// begin + (더 가야하는 index 값)
+	// 즉, begin++의 횟수
+	return 0;
+}
+
 #endif
