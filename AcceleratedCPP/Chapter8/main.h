@@ -154,7 +154,7 @@ int Chapter8Example2() {
 
 	if (iter == vec.end())
 	{
-		domain_error("no matched double number");
+		std::domain_error("no matched double number");
 		return 1;
 	}
 	cout << "find: " << (*iter) << endl;
@@ -208,7 +208,7 @@ int Chapter8Example2_list() {
 
 	if (iter == vec.end())
 	{
-		domain_error("no matched double number");
+		std::domain_error("no matched double number");
 		return 1;
 	}
 	cout << "find: " << (*iter) << endl;

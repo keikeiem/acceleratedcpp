@@ -121,16 +121,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="grade.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="median.cpp" />
     <ClCompile Include="student_info.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="grade.h" />
     <ClInclude Include="main.h" />
-    <ClInclude Include="median.h" />
-    <ClInclude Include="problem.h" />
     <ClInclude Include="student_info.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
