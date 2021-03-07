@@ -7,7 +7,7 @@ using std::endl;
 
 using std::list;
 
-Student_info::Student_info() : midterm(0), final(0) {
+Student_info::Student_info() : midterm_(0), final_(0), grade_(0) {
 
 }
 
@@ -18,7 +18,7 @@ Student_info::Student_info(std::istream& in) {
 }
 
 double Student_info::grade() const {
-	return grade(midterm, final, homework);
+	return grade(midterm_, final_, homework_);
 }
 
 double Student_info::grade(double midterm, double final, const vector<double>& hw) const  {
@@ -45,9 +45,12 @@ double Student_info::get_median_value(const vector<double>& vec) const {
 	return (size % 2) == 0 ? (vec[mid] + vec[(mid - 1)]) / 2 : vec[mid];
 }
 
+void Student_info::compute_grade(void) {
+	grade_ = grade(midterm_, final_, homework_);
+}
 
 std::istream& Student_info::read(std::istream& in) {
-	in >> name_ >> midterm >> final;
+	in >> name_ >> midterm_ >> final_;
 	read_homework(in);
 	return in;
 }
@@ -55,25 +58,39 @@ std::istream& Student_info::read(std::istream& in) {
 std::istream& Student_info::read_homework(std::istream& in) {
 	if (in) {
 		// 초기화
-		homework.clear();
+		homework_.clear();
 		double x;
 		while (in >> x) {
-			homework.push_back(x);
+			homework_.push_back(x);
 		}
 		// istream 객체의 초기화
 		in.clear();
 	}
 	return in;
 }
+std::istream& Student_info::read_and_compute(std::istream& in) {
+	read(in);
+
+	if (!valid()) return in;
+	
+	try {
+		compute_grade();
+	}
+	catch (domain_error e)
+	{
+		cout << e.what() << endl;
+	}
+	return in;
+}
 
 void Student_info::show() {
 	cout << name_
-		<< " | " << midterm
-		<< " | " << final
+		<< " | " << midterm_
+		<< " | " << final_
 		<< " | ";
 
 	int count = 0;
-	for (vector<double>::const_iterator iter = homework.begin(); iter != homework.end(); ++iter)
+	for (vector<double>::const_iterator iter = homework_.begin(); iter != homework_.end(); ++iter)
 	{
 		if (count > 0) cout << ", ";
 
@@ -83,6 +100,6 @@ void Student_info::show() {
 	cout << endl;
 }
 
-bool compare(const Student_info& x, const Student_info& y) {
+bool compare(Student_info& x, Student_info& y) {
 	return x.name() < y.name();
 };

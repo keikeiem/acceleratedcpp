@@ -13,7 +13,8 @@
 
 int main() {
 	 //return Chapter9Example1();
-	 return Chapter9Example2();
+	 //return Chapter9Example2();
+	 return Chapter9Problem1();
 }
 
 bool space(char c) {

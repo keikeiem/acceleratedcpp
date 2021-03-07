@@ -19,25 +19,29 @@ public:
 	double grade(double midterm, double final, const vector<double>& homework) const;
 	double grade(double midterm, double final, double median) const;
 	double get_median_value(const vector<double>& homework) const;
+	void compute_grade(void);
 	
 	std::istream& read(std::istream& in);
 	std::istream& read_homework(std::istream& in);
-	std::string name() const { return (name_); }
-	bool valid() const { return (!homework.empty()); }
+	std::istream& read_and_compute(std::istream& in);
+	std::string name() { return (name_); }
+	bool valid() const { return (!homework_.empty()); }
+	double get_grade() const { return (grade_); }
 
 	void show();
 
 private:
 	std::string name_;
-	double midterm;
-	double final;
-	std::vector<double> homework;
+	double midterm_;
+	double final_;
+	std::vector<double> homework_;
+	double grade_;
 };
 
 typedef std::vector<Student_info> Students;
 //typedef std::list<Student_info> Students;
 
-bool compare(const Student_info&, const Student_info&);
+bool compare(Student_info&, Student_info&);
 std::istream& read(std::istream&, Student_info&);
 std::istream& read_homework(std::istream&, std::vector<double>&);
 #endif

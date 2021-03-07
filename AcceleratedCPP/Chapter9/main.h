@@ -45,8 +45,7 @@ int Chapter9Example2() {
 
 	// 이름순 정렬
 	sort(students.begin(), students.end(), compare);
-
-	for (vector<Student_info>::const_iterator iter = students.begin();
+	for (vector<Student_info>::iterator iter = students.begin();
 		iter != students.end(); ++iter)
 	{
 		cout << iter->name() << string(max_length + 1 - iter->name().size(), ' ');
