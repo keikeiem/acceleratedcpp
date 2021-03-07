@@ -9,9 +9,11 @@
 
 #include "student_info.h"
 #include "main.h"
+#include "problem.h"
 
 int main() {
-	 return Chapter9Example1();
+	 //return Chapter9Example1();
+	 return Chapter9Example2();
 }
 
 bool space(char c) {

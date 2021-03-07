@@ -12,6 +12,9 @@ using std::domain_error;
 
 class Student_info {
 public:
+	Student_info();
+	Student_info(std::istream& in);
+
 	double grade() const;
 	double grade(double midterm, double final, const vector<double>& homework) const;
 	double grade(double midterm, double final, double median) const;

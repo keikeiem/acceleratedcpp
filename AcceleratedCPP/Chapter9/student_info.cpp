@@ -7,6 +7,16 @@ using std::endl;
 
 using std::list;
 
+Student_info::Student_info() : midterm(0), final(0) {
+
+}
+
+Student_info::Student_info(std::istream& in) {
+	read(in);
+	/*in >> name_ >> midterm >> final;
+	read_homework(in);*/
+}
+
 double Student_info::grade() const {
 	return grade(midterm, final, homework);
 }
@@ -74,5 +84,5 @@ void Student_info::show() {
 }
 
 bool compare(const Student_info& x, const Student_info& y) {
-	return x.name() > y.name();
+	return x.name() < y.name();
 };

@@ -15,4 +15,8 @@ using std::domain_error;
 
 using std::list;
 
+int Chapter9Problem1() {
+	return 0;
+}
+
 #endif

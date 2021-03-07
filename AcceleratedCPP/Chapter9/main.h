@@ -31,8 +31,36 @@ int Chapter9Example1() {
 	return 0;
 }
 
-int Chapter9Example3() {
-	// 드디어 class 등장!
+int Chapter9Example2() {
+	// 클래스의 생성자
+	vector<Student_info> students;
+	Student_info record;
+	string::size_type max_length = 0;
+
+	while (record.read(cin))
+	{
+		max_length = std::max(max_length, record.name().size());
+		students.push_back(record);
+	}
+
+	// 이름순 정렬
+	sort(students.begin(), students.end(), compare);
+
+	for (vector<Student_info>::const_iterator iter = students.begin();
+		iter != students.end(); ++iter)
+	{
+		cout << iter->name() << string(max_length + 1 - iter->name().size(), ' ');
+
+		try {
+			double final_grade = iter->grade();
+			streamsize prec = cout.precision();
+			cout << setprecision(3) << final_grade
+				<< setprecision(prec) << endl;
+		}
+		catch (domain_error e) {
+			cout << e.what() << endl;
+		}
+	}
 
 	return 0;
 }
