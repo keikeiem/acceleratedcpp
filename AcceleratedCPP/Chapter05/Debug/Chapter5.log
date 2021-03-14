@@ -1,0 +1,16 @@
+﻿  grade.cpp
+  main.cpp
+E:\Project\acceleratedcpp\AcceleratedCPP\Chapter5\main.h(89,2): error C2672: 'PrintStudentsData': 일치하는 오버로드된 함수가 없습니다.
+E:\Project\acceleratedcpp\AcceleratedCPP\Chapter5\main.h(89,28): error C2784: 'void PrintStudentsData(std::list<T,std::allocator<_Ty>> &)': 'std::list<T,std::allocator<_Ty>> &'의 템플릿 인수를 'std::vector<Student_info,std::allocator<Student_info>>'에서 추론할 수 없습니다.
+E:\Project\acceleratedcpp\AcceleratedCPP\Chapter5\student_info.h(13): message : 'PrintStudentsData' 선언을 참조하십시오.
+E:\Project\acceleratedcpp\AcceleratedCPP\Chapter5\main.h(91,2): error C2672: 'PrintStudentsData': 일치하는 오버로드된 함수가 없습니다.
+E:\Project\acceleratedcpp\AcceleratedCPP\Chapter5\main.h(91,35): error C2784: 'void PrintStudentsData(std::list<T,std::allocator<_Ty>> &)': 'std::list<T,std::allocator<_Ty>> &'의 템플릿 인수를 'std::vector<Student_info,std::allocator<Student_info>>'에서 추론할 수 없습니다.
+E:\Project\acceleratedcpp\AcceleratedCPP\Chapter5\student_info.h(13): message : 'PrintStudentsData' 선언을 참조하십시오.
+E:\Project\acceleratedcpp\AcceleratedCPP\Chapter5\main.cpp(179,37): warning C4305: '인수': 'int'에서 'const _Elem'(으)로 잘립니다.
+          with
+          [
+              _Elem=char
+          ]
+E:\Project\acceleratedcpp\AcceleratedCPP\Chapter5\main.cpp(179,32): warning C4309: '인수': 상수 값이 잘립니다.
+  student_info.cpp
+  코드를 생성하고 있습니다...

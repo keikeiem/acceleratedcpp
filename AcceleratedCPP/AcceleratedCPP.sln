@@ -3,19 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31005.135
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Chapter3", "Chapter3\Chapter3.vcxproj", "{B0C958B4-0C7F-469A-83AD-299182A61C9D}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Chapter03", "Chapter03\Chapter03.vcxproj", "{B0C958B4-0C7F-469A-83AD-299182A61C9D}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Chapter4", "Chapter4\Chapter4.vcxproj", "{20A4C669-5483-4200-B6CD-CA248DF01427}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Chapter04", "Chapter04\Chapter04.vcxproj", "{20A4C669-5483-4200-B6CD-CA248DF01427}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Chapter5", "Chapter5\Chapter5.vcxproj", "{FA931085-BA01-4C84-8AD6-EDFA0D8C626F}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Chapter05", "Chapter05\Chapter05.vcxproj", "{FA931085-BA01-4C84-8AD6-EDFA0D8C626F}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Chapter6", "Chapter6\Chapter6.vcxproj", "{EE9710D4-29A1-421C-96D5-CE1114D4B80B}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Chapter06", "Chapter06\Chapter06.vcxproj", "{EE9710D4-29A1-421C-96D5-CE1114D4B80B}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Chapter7", "Chapter7\Chapter7.vcxproj", "{F2425FF6-E062-43A1-BCE6-5642CBA1E885}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Chapter07", "Chapter07\Chapter07.vcxproj", "{F2425FF6-E062-43A1-BCE6-5642CBA1E885}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Chapter8", "Chapter8\Chapter8.vcxproj", "{4792F07D-806D-4DE1-A90B-EC0366C56E0B}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Chapter08", "Chapter08\Chapter08.vcxproj", "{4792F07D-806D-4DE1-A90B-EC0366C56E0B}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Chapter9", "Chapter9\Chapter9.vcxproj", "{1648E411-0799-4A50-BC05-28795E10C82C}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Chapter09", "Chapter09\Chapter09.vcxproj", "{1648E411-0799-4A50-BC05-28795E10C82C}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Chapter10", "Chapter10\Chapter10.vcxproj", "{6BE3F439-AD08-43F5-8E9C-4BBA879529B9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -81,6 +83,14 @@ Global
 		{1648E411-0799-4A50-BC05-28795E10C82C}.Release|x64.Build.0 = Release|x64
 		{1648E411-0799-4A50-BC05-28795E10C82C}.Release|x86.ActiveCfg = Release|Win32
 		{1648E411-0799-4A50-BC05-28795E10C82C}.Release|x86.Build.0 = Release|Win32
+		{6BE3F439-AD08-43F5-8E9C-4BBA879529B9}.Debug|x64.ActiveCfg = Debug|x64
+		{6BE3F439-AD08-43F5-8E9C-4BBA879529B9}.Debug|x64.Build.0 = Debug|x64
+		{6BE3F439-AD08-43F5-8E9C-4BBA879529B9}.Debug|x86.ActiveCfg = Debug|Win32
+		{6BE3F439-AD08-43F5-8E9C-4BBA879529B9}.Debug|x86.Build.0 = Debug|Win32
+		{6BE3F439-AD08-43F5-8E9C-4BBA879529B9}.Release|x64.ActiveCfg = Release|x64
+		{6BE3F439-AD08-43F5-8E9C-4BBA879529B9}.Release|x64.Build.0 = Release|x64
+		{6BE3F439-AD08-43F5-8E9C-4BBA879529B9}.Release|x86.ActiveCfg = Release|Win32
+		{6BE3F439-AD08-43F5-8E9C-4BBA879529B9}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
