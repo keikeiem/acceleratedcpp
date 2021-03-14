@@ -2,6 +2,7 @@
 #define METHOD_H
 
 #include <vector>
+#include <string>
 
 int next(int s) {
 	return (s + 1);
@@ -94,6 +95,72 @@ int Chapter10Example1_Array() {
 	return 0;
 }
 
+int Chapter10Example2() {
+	const char hello[] = { 'H','e','l','l','o','\0' };
+	std::string s(hello);
+	std::cout << "size: " << std::strlen(hello) << " | " << s.length() << std::endl;
 
+	// string pointer로 선언하기
+	std::string test(hello, hello + std::strlen(hello));
+	std::cout << "test: " << test << std::endl;
+
+	return 0;
+}
+std::string letter_grade(double grade);
+int Chapter10Example3() {
+	// 문자 포인터 배열 초기화하기
+	double grade = 97.5;
+	std::string result;
+
+	// letter_grade 함수 (여기에 쓰느라 일부 수정함)
+	static const double scores[] = {
+		97, 94, 90, 87, 84, 80, 77, 74, 70, 60, 0
+	};
+
+	static const char* const letters[] = {
+		"A+", "A", "A-", "B+", "B", "B-", "C+", "C", "C-", "D", "F"
+	};
+
+	static const size_t ngrades = sizeof(scores) / sizeof(*scores);
+	std::cout << sizeof(scores) << " | "
+		<< sizeof(*scores) << " | "
+		<< ngrades << std::endl;
+	for (size_t i = 0; i < ngrades; ++i)
+	{
+		if (grade >= scores[i])
+		{
+			result = letters[i];
+			break;
+		}
+	}
+	if (result.empty())
+		result = "?\?\?";
+	// letter_grade 함수 (여기에 쓰느라 일부 수정함)
+
+	std::cout << result << std::endl;
+
+	return 0;
+}
+
+int Chapter10Example4(int argc, char** argv) {
+	// 원래는 main에서 체크하는 내용
+	if (argc > 1) {
+		int i;
+		for (i = 1; i < (argc - 1); ++i)
+		{
+			std::cout << argv[i] << " ";
+		}
+		std::cout << argv[i] << std::endl;
+	}
+	// 명령인수에 써 넣은 문자열에 대한 처리를 할 수 있음
+
+
+	return 0;
+}
+
+int Chapter10Example5() {
+
+	return 0;
+}
 
 #endif
