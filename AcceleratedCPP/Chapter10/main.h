@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+#include <fstream>
 
 int next(int s) {
 	return (s + 1);
@@ -158,9 +159,121 @@ int Chapter10Example4(int argc, char** argv) {
 	return 0;
 }
 
-int Chapter10Example5() {
+void copy_file(const std::string& input, const std::string& output) {
+	// in.txt 의 파일을 읽어와서
+	// out.txt 에 저장하기
+	std::ifstream infile(input);
+	std::ofstream outfile(output);
+
+	std::string s;
+
+	while (std::getline(infile, s))
+	{
+		outfile << s << std::endl;
+	}
+}
+
+int Chapter10Example5(int argc, char** argv) {
+	int fail_count = 0;
+	for (int i = 1; i < argc; ++i)
+	{
+		std::ifstream in(argv[i]);
+
+		if (in)
+		{
+			// 파일을 잘 읽어온 경우
+			std::string s;
+			while (std::getline(in, s))
+			{
+				std::cout << s << std::endl;
+			}
+		}
+		else
+		{
+			// 파일을 읽어오는데 실패한 경우
+			std::cerr << "cannot open file: " << argv[i] << std::endl;
+			++fail_count;
+		}
+	}
+	return fail_count;
+}
+
+int* invalid_pointer() {
+	// 이 함수 scope가 끝날 때 x가 사라지므로
+	// 이 함수가 리턴하는 포인터는 invalid하다
+	int x;
+	return (&x);
+}
+
+int* pointer_to_static() {
+	// 변수 x를 정적 할당하면
+	// 프로그램이 끝날 때까지 값이 유지되므로
+	// 포인터도 invalid하지 않게 된다
+	static int x;
+	// 단, 이 함수를 호출할 때마다
+	// 동일한 포인터를 가리키게 된다
+	return (&x);
+}
+
+int* pointer_to_dynamic() {
+	return new int(0);
+}
+
+char* duplicate_chars(const char* p)
+{
+	size_t length = strlen(p) + 1;
+	char* result = new char[length];
+
+	std::copy(p, p + length, result);
+	return result;
+}
+
+int Chapter10Example6() {
+	// 메모리 관리의 세 종류
+	int* invalid = invalid_pointer();
+	std::cout << invalid << " | " << (*invalid) << std::endl;
+	int* p1 = pointer_to_static();
+	int* p2 = pointer_to_static();
+	(*p2) = 5;
+	// p1, p2가 동일하게 5를 가리킴
+	std::cout << "p1: " << p1 << " | " << (*p1) << std::endl;
+	std::cout << "p2: " << p2 << " | " << (*p2) << std::endl;
+
+	// 동적 할당?
+	int* q1 = pointer_to_dynamic();
+	int* q2 = pointer_to_dynamic();
+	(*q1) = 5;
+	(*q2) = 10;
+	// q1, q2가 각각 다른 값을 가리킴
+	std::cout << "q1: " << q1 << " | " << (*q1) << std::endl;
+	std::cout << "q2: " << q2 << " | " << (*q2) << std::endl;
+
+
+	int* p = new int[10];
+	for (int i = 0; i < 10; ++i)
+	{
+		*(p + i) = (i + 1);
+	}
+
+	std::vector<int> vec(p, p + 5);
+
+	for (std::vector<int>::const_iterator iter = vec.begin(); iter != vec.end(); ++iter)
+	{
+		std::cout << (*iter) << std::endl;
+	}
+
+	delete[] p;
+	// delete를 했기때문에 오류 발생!
+	/*for (int i = 0; i < 10; ++i)
+	{
+		std::cout << (p + i) << " | " << *(p + i) << std::endl;
+	}*/
+
+	char test[6] = { 'H','e','l','l','o','\0' };
+	char* result = duplicate_chars(test);
+
+	std::cout << "duplicate: " << result << std::endl;
 
 	return 0;
 }
-
 #endif
