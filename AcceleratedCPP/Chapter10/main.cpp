@@ -13,7 +13,8 @@ int main(int argc, char** argv) {
 	//return Chapter10Example5(argc, argv);
 	//return Chapter10Example6();
 
-	return Chapter10Problem4();
+	//return Chapter10Problem4();
+	return Chapter10Problem6();
 }
 
 //StringList::StringList(void) {
