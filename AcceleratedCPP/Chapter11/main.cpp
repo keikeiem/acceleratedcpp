@@ -1,9 +1,10 @@
 #include <iostream>
 #include "main.h"
+#include "problem.h"
 
 int main(int argc, char** argv) {
 	//return Chapter11Example3();
-	return Chapter11Example5();
+	//return Chapter11Example5();
 }
 
 template <class T>
@@ -60,6 +61,7 @@ template <class T>
 void Vec<T>::grow(void) {
 
 	size_type new_size = std::max(2 * (limit - data), ptrdiff_t(1));
+	// 최소 1개를 늘리거나 현재 크기의 2배로 늘린다
 
 	iterator new_data = alloc.allocate(new_size);
 	iterator new_avail = std::uninitialized_copy(data, avail, new_data);
@@ -69,4 +71,9 @@ void Vec<T>::grow(void) {
 	data = new_data;
 	avail = new_avail;
 	limit = data + new_size;
+}
+
+template <class T>
+void Vec<T>::unchecked_append(const T& val) {
+	alloc.construct(avail++, val);
 }

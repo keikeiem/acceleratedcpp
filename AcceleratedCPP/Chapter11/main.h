@@ -166,7 +166,7 @@ public:
 	// create 함수는 v.begin 부터 v.end를 복사(?)하는 느낌인데
 
 	// 11.3.2 대입 연산자
-	Vec<T>& Vec<T>::operator=(const Vec& rhs) {
+	Vec<T>& operator=(const Vec<T>& rhs) {
 		// 등호의 오른쪽 항이 자기 자신인지 체크해야함.
 		if (&rhs != this) {
 			// 먼저 왼쪽항인 (*this)에 할당된 데이터를 반환해야함.
@@ -212,6 +212,8 @@ public:
 	const_iterator begin() const { return data; }
 	const_iterator end() const { return avail; }
 
+	iterator end_limit() { return limit; }
+
 	// 11.5 메모리 관리
 	// 직접 new 또는 delete를 사용하는 것보다
 	// 표준 라이브러리 <memory>에 있는 allocator<T> 클래스를
@@ -252,7 +254,14 @@ int Chapter11Example5() {
 	// 3. 생성된 요소는 [data, avail) 범위에 있다
 	// 4. 생성되지 않은 요소는 [avail, limit) 범위에 있다.
 
-
+	Vec<int> vec;
+	vec.push_back(5);
+	vec.push_back(4);
+	vec.push_back(3);
+	// 3개째가 들어가면서 2 * 2 가 되어
+	// 총 크기는 4이고, size는 3을 리턴한다.
+	std::cout << vec.size() << " | "
+		<< (vec.end_limit() - vec.begin());
 
 	return 0;
 }
