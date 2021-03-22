@@ -28,6 +28,18 @@ public:
 	bool valid() const { return (!homework_.empty()); }
 	double get_grade() const { return (grade_); }
 
+	void set_name(const std::string s) { name_ = s; }
+	void set_test_score(const double mid, const double final) {
+		midterm_ = mid;
+		final_ = final;
+	}
+	void set_homework(const vector<double> s) {
+		for (vector<double>::const_iterator iter = s.begin(); iter != s.end(); ++iter)
+		{
+			homework_.push_back(*iter);
+		}
+	}
+
 	void show();
 
 private:
@@ -44,4 +56,5 @@ typedef std::vector<Student_info> Students;
 bool compare(Student_info&, Student_info&);
 std::istream& read(std::istream&, Student_info&);
 std::istream& read_homework(std::istream&, std::vector<double>&);
+
 #endif

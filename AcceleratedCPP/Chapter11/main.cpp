@@ -5,6 +5,10 @@
 int main(int argc, char** argv) {
 	//return Chapter11Example3();
 	//return Chapter11Example5();
+
+	//return Chapter11Problem3();
+	//return Chapter11Problem4();
+	return Chapter11Problem6();
 }
 
 template <class T>
@@ -76,4 +80,31 @@ void Vec<T>::grow(void) {
 template <class T>
 void Vec<T>::unchecked_append(const T& val) {
 	alloc.construct(avail++, val);
+}
+
+// Chapter11Problem6
+template <class T>
+void Vec<T>::erase(Vec<T>::iterator pos) {
+	// pos에 있는 요소를 지우는 메서드
+	if (data)
+	{
+		iterator it = pos;
+		if (data == it)
+			data++;
+
+		while (it != avail)
+		{
+			it = (++it);
+			if (it != avail)
+				std::cout << "CHANGE: " << (*it) << std::endl;
+		}
+
+		//alloc.destroy(pos);
+		alloc.deallocate(pos, limit - pos);
+	}
+}
+
+template <class T>
+void Vec<T>::clear(void) {
+	// 모든 요소를 비우는 메서드
 }

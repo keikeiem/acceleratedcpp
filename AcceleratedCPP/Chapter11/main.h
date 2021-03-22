@@ -207,6 +207,10 @@ public:
 		unchecked_append(val);
 	}
 
+	void erase(iterator pos);
+
+	void clear();
+
 	iterator begin() { return data; }
 	iterator end() { return avail; }
 	const_iterator begin() const { return data; }
