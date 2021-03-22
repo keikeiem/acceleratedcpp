@@ -84,12 +84,15 @@ int Chapter11Problem6() {
 	test.push_back(50);
 	test.push_back(30);
 	test.push_back(40);
-	test.erase(test.begin());
+	
 	for (Vec<double>::const_iterator iter = test.begin();
 		iter != test.end(); ++iter)
 	{
 		std::cout << (*iter) << std::endl;
 	}
+
+	test.clear();
+	std::cout << (test.end_limit() - test.begin()) << std::endl;
 
 	return 0;
 }

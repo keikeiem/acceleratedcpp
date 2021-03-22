@@ -84,27 +84,32 @@ void Vec<T>::unchecked_append(const T& val) {
 
 // Chapter11Problem6
 template <class T>
-void Vec<T>::erase(Vec<T>::iterator pos) {
+typename Vec<T>::iterator Vec<T>::erase(Vec<T>::iterator pos) {
 	// pos에 있는 요소를 지우는 메서드
-	if (data)
+	if (data && pos != avail)
 	{
-		iterator it = pos;
-		if (data == it)
-			data++;
-
+		alloc.destroy(pos);
+		iterator it = (pos + 1);
 		while (it != avail)
 		{
-			it = (++it);
-			if (it != avail)
-				std::cout << "CHANGE: " << (*it) << std::endl;
+			alloc.construct(pos++, *(it++));
+			alloc.destroy(pos);
 		}
-
-		//alloc.destroy(pos);
-		alloc.deallocate(pos, limit - pos);
+		avail = pos;
 	}
+	return avail;
 }
 
 template <class T>
 void Vec<T>::clear(void) {
 	// 모든 요소를 비우는 메서드
+	if (data)
+	{
+		iterator it = avail;
+		while (it != data)
+		{
+			alloc.destroy(--it);
+		}
+		avail = data;
+	}
 }

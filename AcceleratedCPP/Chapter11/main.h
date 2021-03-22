@@ -207,7 +207,7 @@ public:
 		unchecked_append(val);
 	}
 
-	void erase(iterator pos);
+	iterator erase(iterator pos);
 
 	void clear();
 
