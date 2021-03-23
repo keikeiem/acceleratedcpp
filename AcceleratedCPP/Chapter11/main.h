@@ -6,7 +6,6 @@
 #include "vec.h"
 #include "vec_student_info.h"
 
-
 // Chapter11Example2
 //template <class T> class Vec {
 //public:

@@ -23,11 +23,11 @@ public:
 	// 둘 다 바뀌게 된다....
 	Vec(const Vec& v) {
 		create(v.begin(), v.end());
-	};
+	}
 
 	Vec(const iterator b, const iterator e) {
 		create(b, e);
-	};
+	}
 	// create 함수는 v.begin 부터 v.end를 복사(?)하는 느낌인데
 
 	// 11.3.2 대입 연산자
@@ -41,7 +41,7 @@ public:
 		}
 		// 자기 자신일 때는 별도의 동작 없이 바로 리턴하면 된다.
 		return (*this);
-	};
+	}
 
 	// 11.3.3 대입과 초기화는 다르다
 	// 하단 Chapter11Example3()에 자세히 기술
@@ -63,10 +63,10 @@ public:
 		return (avail - data);
 	}
 	T& operator[](size_type i) {
-		return data[i];
+		return *(data + i);
 	}
 	const T& operator[] (size_type i) const {
-		return data[i];
+		return *(data + i);
 	}
 
 	void push_back(const T& val) {

@@ -143,6 +143,7 @@
     <ClCompile Include="vec_student_info.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="list.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="problem.h" />
     <ClInclude Include="vec.h" />

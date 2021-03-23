@@ -3,6 +3,7 @@
 
 #include "vec.h"
 #include "vec_student_info.h"
+#include "list.h"
 
 void show_vector(const Vec<double> v) {
 	for (Vec<double>::const_iterator it = v.begin();
@@ -98,6 +99,42 @@ int Chapter11Problem6() {
 
 int Chapter11Problem7() {
 	// Vec을 사용하여 Student_info 프로그램 만들기
+	return 0;
+}
+
+void show_list(List<double> list)
+{
+	for (List<double>::const_iterator iter = list.begin();
+		iter != list.end(); ++iter)
+	{
+		std::cout << (*iter) << std::endl;
+	}
+}
+
+int Chapter11Problem8() {
+	List<double> test;
+	test.push_back(100);
+	test.push_back(50);
+	test.push_back(30);
+	// 3개를 push했을 때 전체 영역이 4개인지 확인
+	std::cout << test.end_limit() << " | " << test.begin() << std::endl;
+
+	// bool 체크 true
+	std::cout << "empty: " << test.empty() << std::endl;
+
+	// 가운데 꺼를 지워보자
+	test.erase(test.begin() + 1);
+	
+	// i번째 요소를 가져오는 메서드
+	std::cout << test[1] << std::endl;
+
+	test.clear();
+	std::cout << test.end_limit() << " | " << test.begin() << std::endl;
+	std::cout << test.end() << " | " << test.begin() << std::endl;
+
+	// bool 체크 true
+	std::cout << "empty: " << test.empty() << std::endl;
+
 	return 0;
 }
 
