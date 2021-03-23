@@ -1,11 +1,8 @@
-#include "student_info.h"
+#include "vec_student_info.h"
 
 using std::istream;
-using std::vector;
 using std::cout;
 using std::endl;
-
-using std::list;
 
 Student_info::Student_info() : midterm_(0), final_(0), grade_(0) {
 
@@ -21,7 +18,7 @@ double Student_info::grade() const {
 	return grade(midterm_, final_, homework_);
 }
 
-double Student_info::grade(double midterm, double final, const vector<double>& hw) const {
+double Student_info::grade(double midterm, double final, const Vec<double>& hw) const {
 	if (hw.size() == 0)
 		throw domain_error("student has done no homework");
 
@@ -32,8 +29,8 @@ double Student_info::grade(double midterm, double final, double hw) const {
 	return (0.2 * midterm) + (0.4 * final) + (0.4 * hw);
 }
 
-double Student_info::get_median_value(const vector<double>& vec) const {
-	typedef std::vector<double>::size_type vec_sz;
+double Student_info::get_median_value(const Vec<double>& vec) const {
+	typedef Vec<double>::size_type vec_sz;
 
 	vec_sz size = vec.size();
 	if (size == 0)
@@ -95,7 +92,8 @@ void Student_info::show() {
 		return;
 	}
 
-	for (vector<double>::const_iterator iter = homework_.begin(); iter != homework_.end(); ++iter)
+	for (Vec<double>::const_iterator iter = homework_.begin();
+		iter != homework_.end(); ++iter)
 	{
 		if (count > 0) cout << ", ";
 

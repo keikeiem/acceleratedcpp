@@ -1,10 +1,11 @@
 #ifndef PROBLEM_H
 #define PROBLEM_H
 
-#include "student_info.h"
+#include "vec.h"
+#include "vec_student_info.h"
 
-void show_vector(const vector<double> v) {
-	for (vector<double>::const_iterator it = v.begin();
+void show_vector(const Vec<double> v) {
+	for (Vec<double>::const_iterator it = v.begin();
 		it != v.end(); ++it)
 	{
 		std::cout << (*it) << std::endl;
@@ -12,17 +13,17 @@ void show_vector(const vector<double> v) {
 }
 
 int Chapter11Problem3() {
-	vector<double> hw;
+	Vec<double> hw;
 	hw.push_back(30);
 	hw.push_back(20);
 
-	vector<double> hw2(hw.begin(), hw.end());
+	Vec<double> hw2(hw.begin(), hw.end());
 	show_vector(hw2);
 
-	vector<double> hw3(hw);
+	Vec<double> hw3(hw);
 	show_vector(hw3);
 
-	vector<double> hw4 = hw;
+	Vec<double> hw4 = hw;
 	show_vector(hw4);
 
 	Student_info info_;
@@ -43,7 +44,7 @@ int Chapter11Problem3() {
 }
 
 Student_info* get_new_item() {
-	vector<double> hw;
+	Vec<double> hw;
 	hw.push_back(30);
 	hw.push_back(20);
 
@@ -69,11 +70,9 @@ int Chapter11Problem4() {
 	return 0;
 }
 
-
-
 int Chapter11Problem6() {
 	// Vec에서 요소를 제거하는 함수를 만들자
-	vector<double> vec;
+	Vec<double> vec;
 	vec.push_back(1);
 	vec.push_back(2);
 	vec.erase(vec.end() - 1);
@@ -94,6 +93,11 @@ int Chapter11Problem6() {
 	test.clear();
 	std::cout << (test.end_limit() - test.begin()) << std::endl;
 
+	return 0;
+}
+
+int Chapter11Problem7() {
+	// Vec을 사용하여 Student_info 프로그램 만들기
 	return 0;
 }
 

@@ -18,7 +18,7 @@
     <ClCompile Include="main.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="student_info.cpp">
+    <ClCompile Include="vec_student_info.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -26,10 +26,13 @@
     <ClInclude Include="main.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="student_info.h">
+    <ClInclude Include="problem.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="problem.h">
+    <ClInclude Include="vec_student_info.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="vec.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
