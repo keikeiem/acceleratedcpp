@@ -94,6 +94,8 @@ private:
 	}
 };
 
+// 비멤버 함수
+
 //std::istream& operator>>(std::istream&, MyStringExt&);
 std::ostream& operator<<(std::ostream&, const MyStringExt&);
 
@@ -105,60 +107,28 @@ MyStringExt operator+(const MyStringExt&, const char *);
 
 inline bool operator==(const MyStringExt& lhs, const MyStringExt& rhs)
 {
-	return (strcmp(lhs.data(), rhs.data()) == 0);
+	return (strcmp(lhs.c_str(), rhs.c_str()) == 0);
 }
 inline bool operator!=(const MyStringExt& lhs, const MyStringExt& rhs)
 {
-	return (strcmp(lhs.data(), rhs.data()) != 0);
+	return (strcmp(lhs.c_str(), rhs.c_str()) != 0);
 }
 inline bool operator<(const MyStringExt& lhs, const MyStringExt& rhs)
 {
-	return (strcmp(lhs.data(), rhs.data()) < 0);
+	return (strcmp(lhs.c_str(), rhs.c_str()) < 0);
 }
 
 inline bool operator<=(const MyStringExt& lhs, const MyStringExt& rhs)
 {
-	return (strcmp(lhs.data(), rhs.data()) <= 0);
+	return (strcmp(lhs.c_str(), rhs.c_str()) <= 0);
 }
 
 inline bool operator>(const MyStringExt& lhs, const MyStringExt& rhs)
 {
-	return (strcmp(lhs.data(), rhs.data()) > 0);
+	return (strcmp(lhs.c_str(), rhs.c_str()) > 0);
 }
 
 inline bool operator>=(const MyStringExt& lhs, const MyStringExt& rhs)
 {
-	return (strcmp(lhs.data(), rhs.data()) >= 0);
+	return (strcmp(lhs.c_str(), rhs.c_str()) >= 0);
 }
-
-// 입출력 연산자를 추가해야한다.
-// cin >> s는
-// cin.operator>>(s) 를 의미한다
-
-//비멤버함수로서 정의한다
-// 여기서는 입력 연산자를 단순한 버전으로 구현한다
-// 클래스 내에 friend 로 다시 정의
-
-//std::istream& operator>>(std::istream& is, MyStringExt& str)
-//{
-//	// 기존의 값을 삭제한다.
-//	str.data_.clear();
-//
-//	// 맨 앞의 공백문자를 읽고 그 후는 무시한다.
-//	char c;
-//	while (is.get(c) && isspace(c));
-//	// istream.get이 다음번 character를 리턴하기때문에
-//	// while문이 무한루프에 빠지지 않는다
-//
-//	if (is) {
-//		do str.data_.push_back(c);
-//		while (is.get(c) && !isspace(c));
-//
-//		// 공백문자를 읽으면, 스트림의 뒤에 집어넣는다
-//		if (is)
-//			is.unget();
-//	}
-//
-//	return (is);
-//}
-#endif
