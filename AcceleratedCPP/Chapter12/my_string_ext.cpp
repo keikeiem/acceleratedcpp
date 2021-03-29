@@ -167,3 +167,20 @@ std::ostream& operator<<(std::ostream& os, const MyStringExt& val)
 	std::copy(val.begin(), val.end(), std::ostream_iterator<char>(os));
 	return (os);
 }
+
+std::istream& get_line(std::istream& in, MyStringExt& val)
+{
+	val.uncreate();
+	val.create(0, '\0'); // 0번 자리에 널 자리 \0을 넣는다.
+
+	char c;
+	// 띄어쓰기가 나오기 전까지 읽어들인다
+
+	if (in)
+	{
+		// 공백이 나오기 전까지 읽어들이고 append한다
+		while (in.get(c) && c != '\n')
+			val.append(c);
+	}
+	return in;
+}

@@ -11,6 +11,7 @@ class MyStringExt {
 	// private 변수의 접근이 가능하도록 한다 (쓰기권한 포함)
 	friend std::istream& operator>>(std::istream& is, MyStringExt& val);
 	friend MyStringExt operator+(const char*, const MyStringExt&);
+	friend std::istream& get_line(std::istream& is, MyStringExt& val);
 
 	// 이런 식으로 클래스 맨 앞에서 선언함
 public:
@@ -65,6 +66,10 @@ public:
 	const_iterator begin(void) const { return data_; }
 	const_iterator end(void) const { return (data_ + size()); }
 
+	bool empty(void) {
+		return (is_not_empty() ? false : true);
+	}
+
 private:
 	char* data_;
 	size_t length_;
@@ -99,8 +104,6 @@ private:
 //std::istream& operator>>(std::istream&, MyStringExt&);
 std::ostream& operator<<(std::ostream&, const MyStringExt&);
 
-std::istream& get_line(std::istream&, MyStringExt&);
-
 MyStringExt operator+(const MyStringExt&, const MyStringExt&);
 MyStringExt operator+(const MyStringExt&, const char *);
 //MyStringExt operator+(const char *, const MyStringExt&);
@@ -132,3 +135,5 @@ inline bool operator>=(const MyStringExt& lhs, const MyStringExt& rhs)
 {
 	return (strcmp(lhs.c_str(), rhs.c_str()) >= 0);
 }
+
+#endif
