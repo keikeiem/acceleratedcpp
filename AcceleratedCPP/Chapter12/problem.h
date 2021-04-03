@@ -99,6 +99,69 @@ int Chapter12Problem8() {
 	return 0;
 }
 
+Vec<MyStringExt> split(const MyStringExt& s) {
+	Vec<MyStringExt> ret;
+	typedef MyStringExt::size_type string_size;
+	string_size i = 0;
 
-#endif // !
+	while (i != s.size())
+	{
+		while (i != s.size() && isspace(s[i]))
+		{
+			++i;
+		}
 
+		string_size j = i;
+		while (j != s.size() && !isspace(s[j]))
+		{
+			++j;
+		}
+
+		if (i != j)
+		{
+			ret.push_back(s.substr(i, j - 1));
+			i = j;
+		}
+	}
+	return ret;
+}
+
+int Chapter12Problem11() {
+	// MyStringExt에서 쓸 수 있는 split 함수 구현하기
+	MyStringExt str = "test 1234";
+	Vec<MyStringExt> vec = split(str);
+
+	for (Vec<MyStringExt>::const_iterator iter = vec.begin(); iter != vec.end(); ++iter)
+	{
+		std::cout << (*iter) << std::endl;
+	}
+
+	return 0;
+}
+
+void assign(Vec<MyStringExt>& vec, const MyStringExt arr[])
+{
+	size_t i = 0;
+	size_t max_size = arr->size();
+	while (i < max_size)
+		vec.push_back(arr[i++]);
+}
+
+int Chapter12Problem13() {
+	Vec<MyStringExt> vec;
+	MyStringExt str[] = {"ABCD", "TEST", "1234", "BBBB"};
+	assign(vec, str);
+
+	for (Vec<MyStringExt>::const_iterator iter = vec.begin(); iter != vec.end(); ++iter)
+	{
+		std::cout << (*iter) << std::endl;
+	}
+
+	return 0;
+}
+
+int Chapter12Problem14() {
+	return 0;
+}
+
+#endif

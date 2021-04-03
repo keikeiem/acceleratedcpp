@@ -70,6 +70,8 @@ public:
 		return (is_not_empty() ? false : true);
 	}
 
+	MyStringExt substr(const size_type b, const size_type e) const;
+
 private:
 	char* data_;
 	size_t length_;

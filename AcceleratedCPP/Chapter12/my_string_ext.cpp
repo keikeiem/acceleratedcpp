@@ -40,6 +40,15 @@ size_t MyStringExt::size(void) const
 	return (length_ - 1);
 }
 
+MyStringExt MyStringExt::substr(const size_type b, const size_type e) const {
+	MyStringExt ret;
+	size_type i = b;
+	while (i <= e)
+		ret.append(data_[i++]);
+
+	return ret;
+}
+
 // private method
 void MyStringExt::create(size_t n, char val)
 {
