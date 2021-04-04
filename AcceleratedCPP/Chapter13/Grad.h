@@ -12,10 +12,15 @@ public:
 	// grade, read는 Core로부터 virutal로 상속받음
 	double grade() const;
 	std::istream& read(std::istream&);
-	virtual void regrade(double d1, double d2) {
+	void regrade(double d1, double d2) {
 		final = d1;
 		thesis = d2;
 	}
+
+	bool valid() const {
+		return (homework.size() > 0 && thesis > 0);
+	};
+
 protected:
 	Grad* clone() const { return new Grad(*this); }
 

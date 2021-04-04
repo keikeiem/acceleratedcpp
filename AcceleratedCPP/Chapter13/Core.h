@@ -23,6 +23,9 @@ public:
 	virtual void regrade(double d1, double d2 = 0) {
 		final = d1;
 	}
+	virtual bool valid() const {
+		return (homework.size() > 0);
+	}
 
 protected:
 	std::istream& read_common(std::istream&);

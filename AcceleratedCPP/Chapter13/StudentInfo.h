@@ -34,6 +34,10 @@ public:
 	void regrade(double d1, double d2) {
 		cp->regrade(d1, d2);
 	}
+
+	bool valid() const {
+		return cp->valid();
+	}
 private:
 	Core* cp;
 };
