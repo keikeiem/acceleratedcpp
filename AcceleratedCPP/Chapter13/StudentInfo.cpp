@@ -23,10 +23,23 @@ std::istream& StudentInfo::read(std::istream& in) {
 	char ch;
 	in >> ch;
 
-	if (ch == 'U')
-		cp = new Core(in);
-	else
+	if (ch == 'A')
+		cp = new Auditor(in);
+	else if (ch == 'G')
 		cp = new Grad(in);
+	else
+		cp = new Core(in);
 
 	return in;
+}
+
+std::string StudentInfo::letter_grade(void) {
+	double final_grade;
+	if (cp)
+	{
+		final_grade = grade();
+		return cp->letter_grade(final_grade);
+	}
+	else
+		throw std::runtime_error("uninitialized Student");
 }

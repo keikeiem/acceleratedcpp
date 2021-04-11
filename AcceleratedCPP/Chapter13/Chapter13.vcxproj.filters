@@ -33,6 +33,9 @@
     <ClCompile Include="StudentInfo.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Auditor.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core.h">

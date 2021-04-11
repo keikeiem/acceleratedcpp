@@ -21,6 +21,8 @@ public:
 		return (homework.size() > 0 && thesis > 0);
 	};
 
+	void show(void);
+
 protected:
 	Grad* clone() const { return new Grad(*this); }
 

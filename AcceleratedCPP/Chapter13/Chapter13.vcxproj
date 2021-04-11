@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Auditor.cpp" />
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="Grad.cpp" />
     <ClCompile Include="grade.cpp" />

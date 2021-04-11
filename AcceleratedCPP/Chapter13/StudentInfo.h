@@ -2,6 +2,7 @@
 #define STUDENT_INFO_H
 
 #include "Grad.h"
+#include "Auditor.h"
 
 class StudentInfo {
 public:
@@ -37,6 +38,15 @@ public:
 
 	bool valid() const {
 		return cp->valid();
+	}
+
+	std::string letter_grade(void);
+
+	void show(void) {
+		if (cp)
+			return cp->show();
+		else
+			throw std::runtime_error("uninitialized Student");
 	}
 private:
 	Core* cp;

@@ -26,6 +26,8 @@ public:
 	virtual bool valid() const {
 		return (homework.size() > 0);
 	}
+	virtual std::string letter_grade(const double grade);
+	virtual void show(void);
 
 protected:
 	std::istream& read_common(std::istream&);
