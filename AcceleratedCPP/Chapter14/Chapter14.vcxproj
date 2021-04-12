@@ -153,6 +153,7 @@
     <ClInclude Include="handle.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="median.h" />
+    <ClInclude Include="Ptr.h" />
     <ClInclude Include="ReferenceHandle.h" />
     <ClInclude Include="StudentInfo.h" />
   </ItemGroup>
