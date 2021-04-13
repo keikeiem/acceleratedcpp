@@ -154,10 +154,12 @@
     <ClInclude Include="handle.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="median.h" />
+    <ClInclude Include="MyString.h" />
     <ClInclude Include="Ptr.h" />
     <ClInclude Include="ReferenceHandle.h" />
     <ClInclude Include="StudentInfo.h" />
     <ClInclude Include="StudentInfoPtr.h" />
+    <ClInclude Include="Vec.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
