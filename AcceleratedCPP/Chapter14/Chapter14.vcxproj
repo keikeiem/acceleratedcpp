@@ -145,6 +145,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="median.cpp" />
     <ClCompile Include="StudentInfo.cpp" />
+    <ClCompile Include="StudentInfoPtr.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core.h" />
@@ -156,6 +157,7 @@
     <ClInclude Include="Ptr.h" />
     <ClInclude Include="ReferenceHandle.h" />
     <ClInclude Include="StudentInfo.h" />
+    <ClInclude Include="StudentInfoPtr.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

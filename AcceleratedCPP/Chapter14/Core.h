@@ -7,12 +7,15 @@
 #include "grade.h"
 #include "handle.h"
 #include "ReferenceHandle.h"
+#include "Ptr.h"
 
 class Core
 {
 	friend class StudentInfo;
+	friend class StudentInfoPtr;
 	friend class Handle<Core>;
 	friend class ReferenceHandle<Core>;
+	friend class Ptr<Core>;
 public:
 	Core();
 	Core(std::string s);
@@ -32,6 +35,7 @@ public:
 	}
 	virtual std::string letter_grade(const double grade);
 	virtual void show(void);
+	virtual void make_unique(void);
 
 protected:
 	std::istream& read_common(std::istream&);

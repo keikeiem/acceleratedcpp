@@ -83,6 +83,10 @@ void Core::show(void) {
 	std::cout << "===============================" << std::endl;
 }
 
+void Core::make_unique(void) {
+	std::cout << "Core::make_unique" << std::endl;
+}
+
 // protected
 
 std::istream& Core::read_common(std::istream& in) {

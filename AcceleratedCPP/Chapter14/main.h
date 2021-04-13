@@ -7,6 +7,9 @@
 #include "handle.h"
 #include "Grad.h"
 #include "ReferenceHandle.h"
+#include "Ptr.h"
+#include "StudentInfo.h"
+#include "StudentInfoPtr.h"
 
 bool compare_Core_handles(const Handle<Core>& a, const Handle<Core>& b)
 {
@@ -73,10 +76,58 @@ int Chapter14Example2() {
 	return 0;
 }
 
+bool compare_Core_Ptr(const StudentInfoPtr& a, const StudentInfoPtr& b)
+{
+	return (a.name() < b.name());
+}
+
 // 14.3 데이터를 공유해야할 때가 언제인지 알려주는 핸들
 int Chapter14Example3() {
+	std::vector<StudentInfoPtr> students;
+	StudentInfoPtr record;
+	std::string::size_type max_length = 0;
 
+	while (record.read(std::cin)) {
+		max_length = std::max(max_length, record.name().size());
+		students.push_back(record);
+	}
+
+	// compare_Core_handles 를 정의해야함
+	std::sort(students.begin(), students.end(), compare_Core_Ptr);
+
+	for (std::vector<StudentInfoPtr>::size_type i = 0;
+		i != students.size(); ++i)
+	{
+		std::cout << students[i].name()
+			<< std::string(max_length + 1 - students[i].name().size(), ' ');
+
+		students[i].regrade(80, 100);
+		try {
+			double final_grade = students[i].grade();
+			std::streamsize prec = std::cout.precision();
+			std::cout << std::setprecision(3) << final_grade
+				<< std::setprecision(prec) << std::endl;
+		}
+		catch (std::domain_error e) {
+			std::cout << e.what() << std::endl;
+		}
+	}
 	return 0;
+}
+
+int Chapter14Example3_2() {
+	StudentInfoPtr s1;
+	s1.read(std::cin);
+	StudentInfoPtr s2 = s1;
+	s2.read(std::cin);
+
+	// s2.read 가 실행되며 s2는 초기화된다. s1은 안 바뀜
+	return 0;
+}
+
+int Chapter14Example4() {
+	// MyStringExt 객체에 Ptr을 적용해보기
+
 }
 
 #endif // !MAIN_H

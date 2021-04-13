@@ -13,6 +13,7 @@ public:
 	double grade() const;
 	std::istream& read(std::istream&);
 	void regrade(double d1, double d2) {
+
 		final = d1;
 		thesis = d2;
 	}

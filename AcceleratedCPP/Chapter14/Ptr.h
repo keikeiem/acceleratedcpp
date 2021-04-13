@@ -31,6 +31,7 @@ public:
 	}
 
 	void make_unique() {
+		std::cout << "Ptr::make_unique" << std::endl;
 		if ((*refptr) != 1) {
 			--(*refptr);
 			refptr = new size_t(1);

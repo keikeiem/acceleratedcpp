@@ -7,9 +7,9 @@ class StudentInfo {
 public:
 	StudentInfo() : cp(0) {}
 	StudentInfo(std::istream& in) : cp(0) { read(in); };
-	/*StudentInfo(const StudentInfo&);
+	StudentInfo(const StudentInfo&);
 	StudentInfo& operator=(const StudentInfo&);
-	~StudentInfo() { delete cp; }*/
+	~StudentInfo() { delete cp; }
 
 	std::istream& read(std::istream&);
 

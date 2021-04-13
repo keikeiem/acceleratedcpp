@@ -1,6 +1,6 @@
 #include "StudentInfo.h"
 
-StudentInfo::StudentInfo(const StudentInfo& s)
+StudentInfo::StudentInfo(const StudentInfo& s) : cp(0)
 {
 	if (s.cp)
 		cp = s.cp->clone();
