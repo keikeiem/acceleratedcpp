@@ -11,6 +11,8 @@
 #include "StudentInfo.h"
 #include "StudentInfoPtr.h"
 
+#include "MyString.h"
+
 bool compare_Core_handles(const Handle<Core>& a, const Handle<Core>& b)
 {
 	return (a->name() < b->name());
@@ -76,7 +78,7 @@ int Chapter14Example2() {
 	return 0;
 }
 
-bool compare_Core_Ptr(const StudentInfoPtr& a, const StudentInfoPtr& b)
+bool compare_Core_StudentPtr(const StudentInfoPtr& a, const StudentInfoPtr& b)
 {
 	return (a.name() < b.name());
 }
@@ -92,8 +94,8 @@ int Chapter14Example3() {
 		students.push_back(record);
 	}
 
-	// compare_Core_handles 를 정의해야함
-	std::sort(students.begin(), students.end(), compare_Core_Ptr);
+	// compare_Core_StudentPtr 를 정의해야함
+	std::sort(students.begin(), students.end(), compare_Core_StudentPtr);
 
 	for (std::vector<StudentInfoPtr>::size_type i = 0;
 		i != students.size(); ++i)
@@ -126,8 +128,20 @@ int Chapter14Example3_2() {
 }
 
 int Chapter14Example4() {
-	// MyStringExt 객체에 Ptr을 적용해보기
+	// MyString 객체에 Ptr을 적용해보기
+	// clone 에서 오류가 발생하는데 어떻게 처리할 지??
+	// 14.4.1, 14.4.2
+	MyString str1 = "MyName";
+	MyString str2 = str1;
 
+	std::cout << "str1: " << str1 << std::endl;
+	std::cout << "str2: " << str2 << std::endl;
+
+	str2 = "Test";
+	std::cout << "str1: " << str1 << std::endl;
+	std::cout << "str2: " << str2 << std::endl;	
+	
+	return 0;
 }
 
 #endif // !MAIN_H

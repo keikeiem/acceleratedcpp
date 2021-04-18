@@ -2,6 +2,7 @@
 #define PTR_HANDLE_H
 
 #include <stdexcept>
+#include <iostream>
 
 template <class T> class Ptr {
 public:
@@ -35,7 +36,7 @@ public:
 		if ((*refptr) != 1) {
 			--(*refptr);
 			refptr = new size_t(1);
-			p = p ? p->clone() : 0;
+			p = p ? clone(p) : 0;
 		}
 	}
 
@@ -65,6 +66,12 @@ Ptr<T>::~Ptr() {
 		delete refptr;
 		delete p;
 	}
+}
+
+template<class T>
+T* clone(const T* tp)
+{
+	return tp->clone();
 }
 
 #endif

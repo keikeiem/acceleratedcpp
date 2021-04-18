@@ -22,16 +22,19 @@ public:
 
 	MyString(size_type n, char c) : data(new Vec<char>(n, c)) { }
 
-	MyString(const char* cp) {
-		std::copy(cp, cp + std::strlen(cp), std::back_inserter(data));
+	MyString(const char* cp) : data(new Vec<char>) {
+		std::copy(cp, cp + std::strlen(cp), std::back_inserter(*data));
 	}
 
 	template <class In>
 	MyString(In b, In e) {
-		std::copy(b, e, std::back_inserter(data));
+		std::copy(b, e, std::back_inserter(*data));
 	}
 
-	char& operator[](size_type i) { return (*data)[i]; }
+	char& operator[](size_type i) {
+		data.make_unique();
+		return (*data)[i];
+	}
 	const char& operator[](size_type i) const { return (*data)[i]; }
 
 	// 이런 식으로 
@@ -43,7 +46,7 @@ public:
 	{
 		data.make_unique();
 
-		std::copy(s.data->begin(), s.data->end(), std::back_inserter(data));
+		std::copy(s.data->begin(), s.data->end(), std::back_inserter(*data));
 		return (*this);
 	}
 
@@ -97,5 +100,10 @@ MyString operator+(const MyString& a, const MyString& b)
 	return (r);
 }
 
+template <>
+Vec<char>* clone(const Vec<char>* vp)
+{
+	return new Vec<char>(*vp);
+}
 
 #endif

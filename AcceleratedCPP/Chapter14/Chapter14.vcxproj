@@ -160,6 +160,7 @@
     <ClInclude Include="StudentInfo.h" />
     <ClInclude Include="StudentInfoPtr.h" />
     <ClInclude Include="Vec.h" />
+    <ClInclude Include="problem.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

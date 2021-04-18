@@ -37,13 +37,14 @@ public:
 	virtual void show(void);
 	virtual void make_unique(void);
 
+	virtual Core* clone() const { return new Core(*this); }
 protected:
 	std::istream& read_common(std::istream&);
 	std::istream& read_homework(std::istream&, std::vector<double>&);
 	double midterm, final;
 	std::vector<double> homework;
 
-	virtual Core* clone() const { return new Core(*this); }
+	
 
 private:
 	std::string n;
